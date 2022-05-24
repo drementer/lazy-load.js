@@ -109,12 +109,12 @@
 			Basit bir döngü ile tüm img elemanlarının lazy-load attr'sine 
 			rastgele görsel url'si ekleniyor 
 		*/
-		for (let i = 0; i <= gorseller.length; i++) {
-			gorseller[i].setAttribute(
+		gorseller.forEach((gorsel, i) => {
+			gorsel.setAttribute(
 				"lazy-load",
 				`http://unsplash.it/400/400?random=${i}&gravity=center`
 			);
-		}
+		});
 	</script>
 
 	<!-- Lazy Load -->
