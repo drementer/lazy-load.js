@@ -1,6 +1,6 @@
 # Lazy Load
 
-Sayfa yüklenme hızını artırmak için görsel içeriklerini ekrana yaklaşınca yükler
+Sayfa yüklenme hızını artırmak için görsel içeriklerini ekranın görünür alanına yaklaşınca yükler
 
 ## Menu
 
