@@ -1,6 +1,7 @@
 {
 	"name": "lazy-load.js",
 	"version": "1.0.0",
+	"homepage": "https://lazy-load-js.netlify.app/",
 	"description": "Sayfa yüklenme hızını artırmak için görsel içeriklerini ekranın görünür alanına yaklaşınca yükler ",
 	"scripts": {
 		"build": "parcel build src/lazy-load.js --dist-dir dist --no-source-maps"
@@ -12,9 +13,16 @@
 		"lazy load",
 		"lazy-load.js"
 	],
-	"author": "drementer",
+	"author": {
+		"name": "drementer",
+		"email": "klncarslanburak@gmail.com",
+		"url": "https://github.com/drementer"
+	},
 	"license": "MIT",
 	"devDependencies": {
 		"parcel": "^2.5.0"
+	},
+	"bugs": {
+		"url": "https://github.com/drementer/lazy-load.js/issues"
 	}
 }
