@@ -16,3 +16,4 @@ node_modules
 # Project
 /tmp/
 .parcel-cache
+package-lock.json
