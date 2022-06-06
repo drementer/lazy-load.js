@@ -1,7 +1,7 @@
 {
 	"name": "lazy-load",
 	"version": "1.0.0",
-	"description": "Lazy load görseller",
+	"description": "Sayfa yüklenme hızını artırmak için görsel içeriklerini ekranın görünür alanına yaklaşınca yükler ",
 	"scripts": {
 		"build": "parcel build src/lazy-load.js --dist-dir dist --no-source-maps"
 	},
@@ -9,7 +9,8 @@
 		"js",
 		"lazy",
 		"load",
-		"lazy load"
+		"lazy load",
+		"lazy-load.js"
 	],
 	"author": "drementer",
 	"license": "MIT",
