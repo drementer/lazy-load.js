@@ -1,5 +1,5 @@
 {
-	"name": "lazy-load",
+	"name": "lazy-load.js",
 	"version": "1.0.0",
 	"description": "Sayfa yüklenme hızını artırmak için görsel içeriklerini ekranın görünür alanına yaklaşınca yükler ",
 	"scripts": {
