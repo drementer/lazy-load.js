@@ -2,12 +2,8 @@
 	"name": "lazy-load",
 	"version": "1.0.0",
 	"description": "Lazy load görseller",
-	"main": "lazy-load.js",
-	"source": "lazy-load.js",
-	"module": "lazy-load.module.js",
 	"scripts": {
-		"watch": "parcel",
-		"build": "parcel build"
+		"build": "parcel build src/lazy-load.js --dist-dir dist --no-source-maps"
 	},
 	"keywords": [
 		"js",
