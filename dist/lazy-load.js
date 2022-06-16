@@ -3,7 +3,7 @@
  * @description Sayfa yüklenme hızını artırmak için görsel içeriklerini ekranın görünür alanına yaklaşınca yükler
  * 
  * @author drementer
- * @version 1.0.2
+ * @version 1.0.3
  * @license MIT
  * @see {@link https://github.com/drementer/lazy-load.js}
  */
