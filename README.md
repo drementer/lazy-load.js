@@ -34,13 +34,13 @@ gereken dosya belirtilir ve kullanıcı sayfaya girdiği anda  o görsel ekranı
 
 ### Ama artık
 Bu yöntemi geliştirme vakti geldi.
-src attr'sini data-lazy attr'si ile değiştiriyoruz ve görselin ekranın
+src attr'sini lazy-load attr'si ile değiştiriyoruz ve görselin ekranın
 görünür alanına gelene kadar yüklenmesine engel olup site performansını
 artırıyoruz.
 ```html
-<img data-lazy="./img.png"> <!-- Dosyadan -->
-<img data-lazy="http://unsplash.it/0?random"> <!-- URL ile -->
-<video data-lazy="./video.mp4"></video> <!-- Video Örneği -->
+<img lazy-load="./img.png"> <!-- Dosyadan -->
+<img lazy-load="http://unsplash.it/0?random"> <!-- URL ile -->
+<video lazy-load="./video.mp4"></video> <!-- Video Örneği -->
 ```
 
 <div id="gelistirici"></div>
