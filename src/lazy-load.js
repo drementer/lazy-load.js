@@ -44,6 +44,6 @@ elemanlar.forEach((eleman) => {
 		});
 	}, ayarlar);
 
-	// IntersectionObserver Eleman için çalıştırılıyor
+	// IntersectionObserver eleman için çalıştırılıyor
 	io.observe(eleman);
 });
