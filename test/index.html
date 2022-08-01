@@ -8,22 +8,22 @@
 
 	<style>
 		figure,
-		video{
+		video {
 			display: block;
 			width: 400px;
 			margin: 100px auto;
 		}
-		figcaption{
+		figcaption {
 			margin-top: 10px;
 		}
-		img{
+		img {
 			display: block;
 			width: 400px;
 			height: 400px;
 			position: relative;
 			border-radius: 10px;
 		}
-		img::after{
+		img::after {
 			content: "";
 			background-color: #e4e4e4;
 			width: 100%;
@@ -34,25 +34,20 @@
 	</style>
 </head>
 <body>
-	
 	<!-- Main -->
 	<main>
-
 		<!-- Section -->
 		<section>
+			<!--
+				Görseller için kalıp
 
-			<!-- 
-				Görseller için kalıp 
-				
 				Bana kolaylık olsun diye javascript ile çoğaltım
 			-->
 			<template>
-
 				<!-- Lazy Load Eleman -->
 				<figure>
-
-					<!-- 
-						Görsel 
+					<!--
+						Görsel
 
 						lazy-load attr'sini bana kolaylık olması için
 						javascript ile otomatik doldurdum
@@ -60,20 +55,21 @@
 						Ama normalde siz ister URL ister görselin dosya
 						yolunu kullanabilirsiniz
 					-->
-					<img 
-						lazy-load="URL/görsel yolu" 
+					<img
+						lazy-load="URL/görsel yolu"
 						alt="Rastgele görsel"
-					>
+					/>
 
 					<!-- Başlık -->
 					<figcaption>
-						In irure eu est veniam officia laborum esse id 
-						sit tempor minim amet excepteur ea.
+						In irure eu est veniam officia laborum esse id sit
+						tempor minim amet excepteur ea.
 					</figcaption>
-				</figure><!-- Lazy Load Eleman SON -->
+				</figure>
+				<!-- Lazy Load Eleman SON -->
 			</template><!-- Kalıp SON -->
 
-			<!-- 
+			<!--
 				Videolar için kalıp
 			-->
 			<template>
@@ -81,9 +77,10 @@
 				<video lazy-load="video.mp4" controls></video>
 				<!-- Lazy Load Eleman SON -->
 			</template><!-- Kalıp SON -->
-
-		</section><!-- Section SON -->
-	</main><!-- Main SON -->
+		</section>
+		<!-- Section SON -->
+	</main>
+	<!-- Main SON -->
 
 	<!-- Lazy Load eleman çoğaltıcı -->
 	<script type="text/javascript">
@@ -93,7 +90,7 @@
 
 		// İşlev
 		template.forEach((temp) => {
-			for(let i = 0; i < 10; i++){
+			for (let i = 0; i < 10; i++) {
 				section.appendChild(temp.content.cloneNode(true));
 			}
 		});
@@ -101,13 +98,12 @@
 
 	<!-- Rastgele fotoğraf oluşturucu -->
 	<script type="text/javascript">
-
 		// Tüm img elemanları seçiliyor
 		const gorseller = document.querySelectorAll("img");
 
-		/* 
-			Basit bir döngü ile tüm img elemanlarının lazy-load attr'sine 
-			rastgele görsel url'si ekleniyor 
+		/*
+			Basit bir döngü ile tüm img elemanlarının lazy-load attr'sine
+			rastgele görsel url'si ekleniyor
 		*/
 		gorseller.forEach((gorsel, i) => {
 			gorsel.setAttribute(
