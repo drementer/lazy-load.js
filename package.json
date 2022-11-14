@@ -2,7 +2,7 @@
 	"name": "lazy-load.js",
 	"version": "1.0.4",
 	"homepage": "https://lazy-load-js.netlify.app/",
-	"description": "Sayfa yüklenme hızını artırmak için görsel içeriklerini ekranın görünür alanına yaklaşınca yükler.",
+	"description": "Loads visual content when it approaches the visible area of ​​the screen to increase page loading speed.",
 	"scripts": {
 		"build": "parcel build src/lazy.js --dist-dir dist --no-source-maps"
 	},
@@ -15,14 +15,14 @@
 	],
 	"author": "drementer <klncarslanburak@gmail.com> (https://github.com/drementer)",
 	"license": "MIT",
-	"devDependencies": {
-		"parcel": "^2.5.0"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/drementer/lazy-load.js.git"
 	},
 	"bugs": {
 		"url": "https://github.com/drementer/lazy-load.js/issues"
+	},
+	"devDependencies": {
+		"parcel": "^2.8.0"
 	}
 }
