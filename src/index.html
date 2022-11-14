@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Lazy-load.js</title>
+	<style>
+		img {
+			position: relative;
+			display: block;
+			margin: 3rem auto;
+			width: 400px;
+			max-width: 100%;
+			height: auto;
+			border-radius: 10px;
+		}
+		img::after {
+			content: attr(alt);
+			position: absolute;
+			inset: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			background-color: #e4e4e4;
+		}
+	</style>
+</head>
+<body>
+	<!-- An Example -->
+	<template>
+		<img lazy="URL or Image Path" alt="Random Image" />
+	</template>
+
+	<!-- Test Script -->
+	<script type="text/javascript">
+		const template = document.querySelector('template');
+		for (let i = 0; i < 10; i++) {
+			document.body.appendChild(template.content.cloneNode(true));
+		}
+
+		const images = document.querySelectorAll('img');
+		images.forEach((image, i) => {
+			image.setAttribute(
+				'lazy',
+				`http://unsplash.it/400/400?random=${i}&gravity=center`
+			);
+		});
+	</script>
+
+	<!-- Lazy Load -->
+	<script src="lazy.js"></script>
+</body>
+</html>
