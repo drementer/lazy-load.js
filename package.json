@@ -20,8 +20,5 @@
 	},
 	"bugs": {
 		"url": "https://github.com/drementer/lazy-load.js/issues"
-	},
-	"devDependencies": {
-		"parcel": "^2.8.0"
 	}
 }
