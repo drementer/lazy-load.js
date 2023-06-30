@@ -1,7 +1,7 @@
 {
 	"name": "lazy-load.js",
 	"version": "1.0.5",
-	"homepage": "https://lazy-load-js.netlify.app/",
+	"homepage": "https://github.com/drementer/lazy-load.js",
 	"description": "Loads visual content when it approaches the visible area of ​​the screen to increase page loading speed.",
 	"scripts": {
 		"build": "parcel build src/lazy.js --dist-dir dist --no-source-maps"
