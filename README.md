@@ -9,7 +9,8 @@ To use Lazy Load Images, include the `lazyLoadImages` function in your JavaScrip
 - `selector` (string, default: '[lazy]'): CSS selector for lazy load items.
 - `options` (object): IntersectionObserver options.
 
-If no selector is provided, the default selector '[lazy]' will be used. If no options are provided, default options will be used.
+If no selector is provided, the default selector '[lazy]' will be used.
+If no options are provided, default options will be used.
 
 ```html
 <img lazy="Path Of Asset" />
@@ -17,6 +18,10 @@ If no selector is provided, the default selector '[lazy]' will be used. If no op
 ```
 
 ```javascript
+lazyLoad();
+
+// Or
+
 lazyLoad('[lazy]', {
   root: null,
   threshold: 1,
