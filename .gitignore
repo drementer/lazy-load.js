@@ -1,19 +1,6 @@
 # System
 .DS_Store
-.Spotlight-V100
-Desktop.ini
-desktop.ini
-
-# IDEs
-.vscode
-*.sublime-project
-*.sublime-workspace
-
-# ENVs
-node_modules
-.env
+[Dd]esktop.ini
 
 # Project
-/tmp/
-.parcel-cache
 package-lock.json

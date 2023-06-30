@@ -1,6 +1,6 @@
 {
 	"name": "lazy-load.js",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"homepage": "https://lazy-load-js.netlify.app/",
 	"description": "Loads visual content when it approaches the visible area of ​​the screen to increase page loading speed.",
 	"scripts": {
@@ -9,7 +9,6 @@
 	"keywords": [
 		"js",
 		"lazy",
-		"load",
 		"lazy load",
 		"lazy-load.js"
 	],
@@ -21,8 +20,5 @@
 	},
 	"bugs": {
 		"url": "https://github.com/drementer/lazy-load.js/issues"
-	},
-	"devDependencies": {
-		"parcel": "^2.8.0"
 	}
 }
