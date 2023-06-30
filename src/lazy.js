@@ -6,7 +6,7 @@
  * @param {string} [selector='[lazy]'] - CSS selector for lazy load items.
  * @param {Object} [options] - IntersectionObserver options.
  */
-const lazyLoadImages = (selector = '[lazy]', options = {}) => {
+const lazyLoad = (selector = '[lazy]', options = {}) => {
   const lazyLoadItems = document.querySelectorAll(selector);
 
   const defaultOptions = {
