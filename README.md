@@ -1,56 +1,35 @@
-# Lazy Load
+# Lazy Load Images
 
-Sayfa yüklenme hızını artırmak için görsel içeriklerini ekranın görünür alanına yaklaşınca yükler
+Lazy Load Images is a JavaScript utility that allows you to lazy load visual content when it approaches the visible area of the screen. This technique helps improve page loading speed by deferring the loading of images until they are actually needed.
 
-## Menu
+## Usage
 
--   [Hızlı Başlangıç](#hizli-baslangic)
--   [Kullanım & Örnekler](#kullanim-ornekler)
--   [Geliştirici](#gelistirici)
--   [Lisans](#lisans)
+To use Lazy Load Images, include the `lazyLoadImages` function in your JavaScript code. The function takes two optional parameters:
 
-<div id="hizli-baslangic"></div>
+- `selector` (string, default: '[lazy]'): CSS selector for lazy load items.
+- `options` (object): IntersectionObserver options.
 
-## Hızlı Başlangıç
+If no selector is provided, the default selector '[lazy]' will be used. If no options are provided, default options will be used.
 
-Terminal kullanarak indir
-
-```bash
-  git clone https://github.com/drementer/lazy-load.git
-```
-
-<div id="kullanim-ornekler"></div>
-
-## Kullanım & örnekler
-
-### Olması gereken
-Normalde bir görsel veya video için src attr'si yardımı ile çekilmesi
-gereken dosya belirtilir ve kullanıcı sayfaya girdiği anda  o görsel ekranın görünür alanında olmasa bile tarayıcısı src attr'si ile belirtilen dosyayı çekmeye çalışarak vakit kaybeder.
 ```html
-<img src="./img.png"> <!-- Dosyadan -->
-<img src="http://unsplash.it/0?random"> <!-- URL ile -->
-<video src="./video.mp4"></video> <!-- Video Örneği -->
+<img lazy="Path Of Asset" />
+<video lazy="Path Of Asset"></video>
 ```
 
-### Ama artık
-Bu yöntemi geliştirme vakti geldi.
-src attr'sini lazy-load attr'si ile değiştiriyoruz ve görselin ekranın
-görünür alanına gelene kadar yüklenmesine engel olup site performansını
-artırıyoruz.
-```html
-<img lazy-load="./img.png"> <!-- Dosyadan -->
-<img lazy-load="http://unsplash.it/0?random"> <!-- URL ile -->
-<video lazy-load="./video.mp4"></video> <!-- Video Örneği -->
+```javascript
+lazyLoad('[lazy]', {
+  root: null,
+  threshold: 1,
+  rootMargin: '300px 0px',
+});
 ```
 
-<div id="gelistirici"></div>
+The lazy load functionality will be applied to all elements that match the given selector. When an element approaches the visible area of the screen, its 'lazy' attribute will be used as the source for the 'src' attribute, and the element will be marked as loaded by adding the '-loaded' class.
 
-## Geliştirici
+## Developer
 
--   [@drementer](https://github.com/drementer)
+[@drementer](https://github.com/drementer)
 
-<div id="lisans"></div>
-
-## Lisans
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
