@@ -12,12 +12,12 @@
 		"lazy-load.js"
 	],
 	"author": "drementer <klncarslanburak@gmail.com> (https://github.com/drementer)",
-	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/drementer/lazy-load.js.git"
 	},
 	"bugs": {
 		"url": "https://github.com/drementer/lazy-load.js/issues"
-	}
+	},
+	"license": "MIT"
 }
