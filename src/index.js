@@ -72,10 +72,10 @@ const lazyLoad = (
     observerOptions
   );
 
-	/**
-	 * Select 'selector' which is not empty.
-	 * `[lazy]:not([lazy=''])`
-	 */
+  /**
+   * Select 'selector' which is not empty.
+   * `[lazy]:not([lazy=''])`
+   */
   const lazyLoadItems = document.querySelectorAll(
     `[${options.tag}]:not([${options.tag}=''])`
   );
