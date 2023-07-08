@@ -3,6 +3,8 @@
 	"version": "1.0.6",
 	"homepage": "https://github.com/drementer/lazy-load.js",
 	"description": "Loads visual content when it approaches the visible area of ​​the screen to increase page loading speed.",
+	"source": "src/index.js",
+  "main": "src/index.js",
 	"keywords": [
 		"js",
 		"lazy",
