@@ -22,10 +22,6 @@ lazyLoad('lazy', {
 
 The lazy load functionality will be applied to all elements that match the specified selector. When an element comes into view, its 'lazy' attribute will be used as the source for the 'src' attribute, and the element will be marked as loaded by adding the '-loaded' class.
 
-## Developer
-
-[@drementer](https://github.com/drementer)
-
 ## License
 
 [MIT License](https://choosealicense.com/licenses/mit/).
