@@ -1,23 +1,23 @@
 {
-	"name": "lazy-load.js",
-	"version": "1.0.6",
-	"homepage": "https://github.com/drementer/lazy-load.js",
-	"description": "Loads visual content when it approaches the visible area of ​​the screen to increase page loading speed.",
-	"source": "src/index.js",
+  "name": "lazy-load.js",
+  "version": "1.0.6",
+  "homepage": "https://github.com/drementer/lazy-load.js",
+  "description": "Loads visual content when it approaches the visible area of ​​the screen to increase page loading speed.",
+  "source": "src/index.js",
   "main": "src/index.js",
-	"keywords": [
-		"js",
-		"lazy",
-		"lazy load",
-		"lazy-load.js"
-	],
-	"author": "drementer <klncarslanburak@gmail.com> (https://github.com/drementer)",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/drementer/lazy-load.js.git"
-	},
-	"bugs": {
-		"url": "https://github.com/drementer/lazy-load.js/issues"
-	},
-	"license": "MIT"
+  "keywords": [
+    "js",
+    "lazy",
+    "lazy load",
+    "lazy-load.js"
+  ],
+  "author": "drementer <klncarslanburak@gmail.com> (https://github.com/drementer)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drementer/lazy-load.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/drementer/lazy-load.js/issues"
+  },
+  "license": "MIT"
 }
