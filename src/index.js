@@ -2,7 +2,7 @@
  * Lazily loads assets based on intersection observer.
  *
  * @param {string} [selector='lazy'] - Selector for lazy load elements.
- * @param {IntersectionObserverInit} [observerOptions={
+ * @param {object} [observerOptions={
  *   root: null,
  *   threshold: 1,
  *   rootMargin: '300px 0px',
@@ -74,7 +74,7 @@ const lazyLoad = (
 
   /**
    * Select 'selector' which is not empty.
-   * `[lazy]:not([lazy=''])`
+   * `[selector]:not([selector=''])`
    */
   const lazyLoadItems = document.querySelectorAll(
     `[${options.tag}]:not([${options.tag}=''])`
