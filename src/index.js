@@ -1,59 +1,115 @@
 /**
- * Lazily loads assets based on intersection observer.
+ * Lazy loads assets for elements with lazy attributes (e.g., lazy-src, lazy-alt).
  *
- * @param {string} [selector='lazy'] - Selector for lazy load elements.
- * @param {object} [observerOptions={
- *   root: null,
- *   threshold: 1,
- *   rootMargin: '300px 0px',
- * }] - Options for the intersection observer.
+ * @param {string} [selector="[lazy]"] - The CSS selector for lazy loadable elements.
+ * @param {Object} [options={}] - Additional options for configuring the lazy loading behavior.
  */
-const lazyLoad = (
-  selector = 'lazy',
-  observerOptions = {
-    root: null,
-    threshold: 1,
-    rootMargin: '300px 0px',
-  }
-) => {
+const lazyLoad = (selector = '[lazy]', options = {}) => {
   /**
-   * Options for lazy loading.
+   * Default options for lazy loading behavior.
    *
-   * @type {object}
+   * @type {Object}
    *
-   * @property {string} tag - Attribute name for lazy load elements.
-   * @property {string} backgroundImage - Attribute name for lazy load elements with background image.
-   * @property {string} loaded - Class name to add when the asset is loaded.
+   * @param {string} [otag=selector] - The CSS selector for lazy loadable elements.
+   * @param {string} [toggleClass="-loaded"] - The class name to toggle on elements after loading.
+   * @param {Function} [onLoaded=(element)=>{}] - Callback function to execute when an element is successfully loaded.
+   * @param {Function} [onError=(element, error)=>{}] - Callback function to execute when an error occurs during loading.
+   * @param {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
    */
-  const options = {
+  const defaultOptions = {
     tag: selector,
-    backgroundImage: `${selector}-bg`,
-    loaded: '-loaded',
+    toggleClass: '-loaded',
+    onLoaded: () => {},
+    onError: (element, error) => {
+      console.log('🚀 Error on ~ element, error:', element, error);
+    },
+    observer: {
+      root: null,
+      threshold: 1,
+      rootMargin: '300px 0px',
+    },
   };
 
   /**
-   * Loads the asset for the given element.
+   * Options object for configuring the lazy loading behavior.
+   *
+   * @type {Object}
+   */
+  options = { ...defaultOptions, ...options };
+
+  /**
+   * Loads the asset for the given image element.
+   *
+   * @private
+   *
+   * @param {HTMLImageElement} img - The image element to load the asset for.
+   * @param {string} assetAttr - The asset URL attribute value.
+   * @param {string} assetAlt - The asset alt attribute value.
+   */
+  const loadAssetImage = (img, assetAttr, assetAlt) => {
+    img.src = assetAttr;
+    img.alt = assetAlt;
+  };
+
+  /**
+   * Loads the asset for the given picture element.
+   *
+   * @private
+   *
+   * @param {HTMLPictureElement} element - The picture element to load the asset for.
+   * @param {string} assetAttr - The asset URL attribute value.
+   * @param {string} assetAlt - The asset alt attribute value.
+   */
+  const loadAssetPicture = (element, assetAttr, assetAlt) => {
+    let img = element.querySelector('img');
+    if (!img) {
+      img = document.createElement('img');
+      element.append(img);
+    }
+    loadAssetImage(img, assetAttr, assetAlt);
+  };
+
+  /**
+   * Loads the asset for the given video element.
+   *
+   * @private
+   *
+   * @param {HTMLVideoElement} element - The video element to load the asset for.
+   * @param {string} assetAttr - The asset URL attribute value.
+   */
+  const loadAssetVideo = (element, assetAttr) => {
+    element.src = assetAttr;
+  };
+
+  /**
+   * Loads the asset for the given element based on its type (img, picture, video).
+   *
+   * @private
    *
    * @param {HTMLElement} element - The element to load the asset for.
    */
   const loadAsset = (element) => {
-    const assetPath = element.getAttribute(options.tag);
+    const elementType = element.tagName.toLowerCase();
 
-    if (!assetPath) return;
+    const isImage = elementType === 'img';
+    const isPicture = elementType === 'picture';
+    const isVideo = elementType === 'video';
 
-    if (element.hasAttribute(options.backgroundImage)) {
-      element.style.backgroundImage = `url(${assetPath})`;
-      element.removeAttribute(options.backgroundImage);
-    } else {
-      element.setAttribute('src', assetPath);
-    }
+    const assetAttr = element.getAttribute(`lazy-src`);
+    const assetAlt = element.getAttribute(`lazy-alt`) || '';
+    const backgroundAttr = element.getAttribute(`lazy-background`);
 
-    element.classList.add(options.loaded);
-    element.removeAttribute(options.tag);
+    if (isImage) return loadAssetImage(element, assetAttr, assetAlt);
+    if (isPicture) return loadAssetPicture(element, assetAttr, assetAlt);
+    if (isVideo) return loadAssetVideo(element, assetAttr);
+
+    element.src = assetAttr;
   };
 
   /**
    * Handles the intersection of lazy load elements.
+   *
+   * @private
    *
    * @param {IntersectionObserverEntry[]} entries - The entries for the intersection observer.
    * @param {IntersectionObserver} observer - The intersection observer instance.
@@ -62,23 +118,33 @@ const lazyLoad = (
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
 
-      loadAsset(entry.target);
-      observer.unobserve(entry.target);
+      try {
+        loadAsset(entry.target);
+        options.onLoaded(entry);
+      } catch (error) {
+        options.onError(entry, error);
+      } finally {
+        observer.unobserve(entry.target);
+      }
     });
   };
 
+  /**
+   * IntersectionObserver used for lazy loading.
+   *
+   * @type {IntersectionObserver}
+   */
   const observer = new IntersectionObserver(
     handleIntersection,
-    observerOptions
+    options.observer
   );
 
   /**
-   * Select 'selector' which is not empty.
-   * `[selector]:not([selector=''])`
+   * NodeList of lazy loadable elements.
+   *
+   * @type {NodeList}
    */
-  const lazyLoadItems = document.querySelectorAll(
-    `[${options.tag}]:not([${options.tag}=''])`
-  );
+  const lazyLoadItems = document.querySelectorAll(options.tag);
 
   lazyLoadItems.forEach((item) => observer.observe(item));
 };
