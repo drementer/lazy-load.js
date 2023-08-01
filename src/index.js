@@ -46,7 +46,7 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
    * @param {string} assetAttr - The asset URL attribute value.
    * @param {string} assetAlt - The asset alt attribute value.
    */
-  const loadAssetImage = (img, assetAttr, assetAlt) => {
+  const loadImage = (img, assetAttr, assetAlt) => {
     img.src = assetAttr;
     img.alt = assetAlt;
   };
@@ -60,13 +60,13 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
    * @param {string} assetAttr - The asset URL attribute value.
    * @param {string} assetAlt - The asset alt attribute value.
    */
-  const loadAssetPicture = (element, assetAttr, assetAlt) => {
+  const loadPicture = (element, assetAttr, assetAlt) => {
     let img = element.querySelector('img');
     if (!img) {
       img = document.createElement('img');
       element.append(img);
     }
-    loadAssetImage(img, assetAttr, assetAlt);
+    loadImage(img, assetAttr, assetAlt);
   };
 
   /**
@@ -77,7 +77,7 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
    * @param {HTMLVideoElement} element - The video element to load the asset for.
    * @param {string} assetAttr - The asset URL attribute value.
    */
-  const loadAssetVideo = (element, assetAttr) => {
+  const loadVideo = (element, assetAttr) => {
     element.src = assetAttr;
   };
 
@@ -99,9 +99,9 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
     const assetAlt = element.getAttribute(`lazy-alt`) || '';
     const backgroundAttr = element.getAttribute(`lazy-background`);
 
-    if (isImage) return loadAssetImage(element, assetAttr, assetAlt);
-    if (isPicture) return loadAssetPicture(element, assetAttr, assetAlt);
-    if (isVideo) return loadAssetVideo(element, assetAttr);
+    if (isImage) return loadImage(element, assetAttr, assetAlt);
+    if (isPicture) return loadPicture(element, assetAttr, assetAlt);
+    if (isVideo) return loadVideo(element, assetAttr);
 
     element.src = assetAttr;
   };
