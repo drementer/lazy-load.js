@@ -51,6 +51,10 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
     img.alt = assetAlt;
   };
 
+  const loadBackground = (element, assetAttr) => {
+    element.style.background = `url(${assetAttr})`;
+  };
+
   /**
    * Loads the asset for the given picture element.
    *
@@ -99,6 +103,7 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
     const assetAlt = element.getAttribute(`lazy-alt`) || '';
     const backgroundAttr = element.getAttribute(`lazy-background`);
 
+    if (backgroundAttr) return loadBackground(element, backgroundAttr);
     if (isImage) return loadImage(element, assetAttr, assetAlt);
     if (isPicture) return loadPicture(element, assetAttr, assetAlt);
     if (isVideo) return loadVideo(element, assetAttr);
