@@ -1,5 +1,5 @@
 /**
- * Lazy loads assets for elements with lazy attributes (e.g., lazy-src, lazy-alt).
+ * Lazy loads assets for elements.
  *
  * @param {string} [selector="[lazy]"] - The CSS selector for lazy loadable elements.
  * @param {Object} [options={}] - Additional options for configuring the lazy loading behavior.
@@ -10,7 +10,7 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
    *
    * @type {Object}
    *
-   * @param {string} [otag=selector] - The CSS selector for lazy loadable elements.
+   * @param {string} [tag=selector] - The CSS selector for lazy loadable elements.
    * @param {string} [toggleClass="-loaded"] - The class name to toggle on elements after loading.
    * @param {Function} [onLoaded=(element)=>{}] - Callback function to execute when an element is successfully loaded.
    * @param {Function} [onError=(element, error)=>{}] - Callback function to execute when an error occurs during loading.
