@@ -1,5 +1,5 @@
 /**
- * Lazy loads assets for elements.
+ * Lazy load assets.
  *
  * @param {string} [selector="[lazy]"] - The CSS selector for lazy loadable elements.
  * @param {Object} [options={}] - Additional options for configuring the lazy loading behavior.
@@ -12,8 +12,8 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
    *
    * @param {string} [tag=selector] - The CSS selector for lazy loadable elements.
    * @param {string} [toggleClass="-loaded"] - The class name to toggle on elements after loading.
-   * @param {Function} [onLoaded=(element)=>{}] - Callback function to execute when an element is successfully loaded.
-   * @param {Function} [onError=(element, error)=>{}] - Callback function to execute when an error occurs during loading.
+   * @param {Function} [onLoaded] - Callback function to execute when an element is successfully loaded.
+   * @param {Function} [onError] - Callback function to execute when an error occurs during loading.
    * @param {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
    */
   const defaultOptions = {
