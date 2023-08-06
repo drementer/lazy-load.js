@@ -21,7 +21,7 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
     toggleClass: '-loaded',
     onLoaded: () => {},
     onError: (element, error) => {
-      console.log('🚀 Error on ~ element, error:', element, error);
+      console.error('🚀 Error on ~ element, error:', element, error);
     },
     observer: {
       root: null,
