@@ -122,14 +122,15 @@ const lazyLoad = (selector = '[lazy]', options = {}) => {
   const handleIntersection = (entries, observer) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
+      const { target } = entry;
 
       try {
-        loadAsset(entry.target);
-        options.onLoaded(entry);
+        loadAsset(target);
+        options.onLoaded(target);
       } catch (error) {
-        options.onError(entry, error);
+        options.onError(target, error);
       } finally {
-        observer.unobserve(entry.target);
+        observer.unobserve(target); // bunun tam testini yapmak lazim
       }
     });
   };
