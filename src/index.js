@@ -29,7 +29,7 @@ const lazyLoad = (options = {}) => {
       const { target } = entry;
 
       try {
-        loadAsset(target);
+        loadAsset(target, options);
         options.onLoaded(target);
       } catch (error) {
         options.onError(target, error);

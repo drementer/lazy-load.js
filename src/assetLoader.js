@@ -53,16 +53,17 @@ const loadVideo = (element, assetAttr) => {
  *
  * @param {HTMLElement} element - The element to load the asset for.
  */
-const loadAsset = (element) => {
+const loadAsset = (element, options) => {
+  const { tag } = options;
   const elementType = element.tagName.toLowerCase();
 
   const isImage = elementType === 'img';
   const isPicture = elementType === 'picture';
   const isVideo = elementType === 'video';
 
-  const assetAttr = element.getAttribute(`lazy-src`);
-  const assetAlt = element.getAttribute(`lazy-alt`) || '';
-  const backgroundAttr = element.getAttribute(`lazy-background`);
+  const assetAttr = element.getAttribute(`${tag}-src`);
+  const assetAlt = element.getAttribute(`${tag}-alt`) || '';
+  const backgroundAttr = element.getAttribute(`${tag}-background`);
 
   if (backgroundAttr) return loadBackground(element, backgroundAttr);
   if (isImage) return loadImage(element, assetAttr, assetAlt);
