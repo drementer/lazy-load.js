@@ -5,15 +5,15 @@ import loadAsset from './assetLoader.js';
  * Lazy load assets.
  *
  * @param {string} [selector="[lazy]"] - The CSS selector for lazy loadable elements.
- * @param {Object} [options={}] - Additional options for configuring the lazy loading behavior.
+ * @param {Object} [settings={}] - Additional options for configuring the lazy loading behavior.
  */
-const lazyLoad = (options = {}) => {
+const lazyLoad = (settings = {}) => {
   /**
    * Options object for configuring the lazy loading behavior.
    *
    * @type {Object}
    */
-  options = { ...defaultOptions, ...options };
+  const options = { ...defaultOptions, ...settings };
 
   /**
    * Handles the intersection of lazy load elements.
