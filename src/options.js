@@ -10,7 +10,8 @@
  * @param {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
  */
 const defaultOptions = {
-  tag: '[lazy]',
+  tag: 'lazy',
+  selector: '[lazy]',
   toggleClass: '-loaded',
   onLoaded: () => {},
   onError: (element, error) => {
