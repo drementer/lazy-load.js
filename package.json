@@ -4,7 +4,11 @@
   "homepage": "https://github.com/drementer/lazy-load.js",
   "description": "Loads visual content when it approaches the visible area of ​​the screen to increase page loading speed.",
   "source": "src/index.js",
-  "main": "src/index.js",
+  "module": "dist/lazy-load.js",
+  "scripts": {
+    "watch": "parcel watch",
+    "build": "parcel build --no-source-maps --no-cache"
+  },
   "keywords": [
     "js",
     "lazy",
@@ -19,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/drementer/lazy-load.js/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@parcel/resolver-glob": "^2.9.3",
+    "parcel": "^2.9.3"
+  }
 }
