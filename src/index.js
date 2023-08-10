@@ -54,7 +54,7 @@ const lazyLoad = (settings = {}) => {
    *
    * @type {NodeList}
    */
-  const lazyLoadItems = document.querySelectorAll(options.tag);
+  const lazyLoadItems = document.querySelectorAll(options.selector);
 
   lazyLoadItems.forEach((item) => observer.observe(item));
 };
