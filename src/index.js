@@ -1,3 +1,13 @@
+/**
+ * Lazy-load.js
+ *
+ * @author drementer
+ * @module lazyLoad
+ * @version 1.0.6
+ * @license MIT
+ * @see {@link https://github.com/drementer/lazy-load.js}
+ */
+
 import defaultOptions from './options.js';
 import loadAsset from './assetLoader.js';
 

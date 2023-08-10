@@ -1,4 +1,12 @@
 /**
+ * Lazy-load.js
+ *
+ * @author drementer
+ * @module lazyLoad
+ * @version 1.0.6
+ * @license MIT
+ * @see {@link https://github.com/drementer/lazy-load.js}
+ */ /**
  * Default options for lazy loading behavior.
  *
  * @type {Object}
