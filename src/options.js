@@ -20,7 +20,7 @@ const defaultOptions = {
   observer: {
     root: null,
     threshold: 1,
-    rootMargin: '300px 0px',
+    rootMargin: '100% 0px', // Burayı daha detalı araştırmam gerek
   },
 };
 
