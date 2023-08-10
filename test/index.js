@@ -1,4 +1,4 @@
-import lazyLoad from '/src/index.js';
+import lazyLoad from '/dist/lazy-load.js';
 
 lazyLoad({
   onLoaded: (element) => {
