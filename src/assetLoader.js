@@ -65,10 +65,10 @@ const loadAsset = (element, options) => {
   const assetAlt = element.getAttribute(`${tag}-alt`) || '';
   const backgroundAttr = element.getAttribute(`${tag}-background`);
 
-  if (backgroundAttr) return loadBackground(element, backgroundAttr);
-  if (isImage) return loadImage(element, assetAttr, assetAlt);
-  if (isPicture) return loadPicture(element, assetAttr, assetAlt);
-  if (isVideo) return loadVideo(element, assetAttr);
+  if (backgroundAttr) loadBackground(element, backgroundAttr);
+  if (isImage) loadImage(element, assetAttr, assetAlt);
+  if (isPicture) loadPicture(element, assetAttr, assetAlt);
+  if (isVideo) loadVideo(element, assetAttr);
 
   element.src = assetAttr;
 };
