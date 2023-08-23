@@ -16,7 +16,7 @@
  * @param {Function} [onLoaded] - Callback function to execute when an element is successfully loaded.
  * @param {Function} [onError] - Callback function to execute when an error occurs during loading.
  * @param {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
- */ const $db127449446b8099$var$defaultOptions = {
+ */ const $50e97065b94a2e88$var$defaultOptions = {
     tag: "lazy",
     selector: "[lazy]",
     toggleClass: "-loaded",
@@ -30,7 +30,7 @@
         rootMargin: "100% 0px"
     }
 };
-var $db127449446b8099$export$2e2bcd8739ae039 = $db127449446b8099$var$defaultOptions;
+var $50e97065b94a2e88$export$2e2bcd8739ae039 = $50e97065b94a2e88$var$defaultOptions;
 
 
 /**
@@ -41,11 +41,11 @@ var $db127449446b8099$export$2e2bcd8739ae039 = $db127449446b8099$var$defaultOpti
  * @param {HTMLImageElement} img - The image element to load the asset for.
  * @param {string} assetAttr - The asset URL attribute value.
  * @param {string} assetAlt - The asset alt attribute value.
- */ const $fa423858cf60d4ae$var$loadImage = (img, assetAttr, assetAlt)=>{
+ */ const $f85e789b098d4f3c$var$loadImage = (img, assetAttr, assetAlt)=>{
     img.src = assetAttr;
     img.alt = assetAlt;
 };
-const $fa423858cf60d4ae$var$loadBackground = (element, assetAttr)=>{
+const $f85e789b098d4f3c$var$loadBackground = (element, assetAttr)=>{
     element.style.background = `url(${assetAttr})`;
 };
 /**
@@ -56,13 +56,13 @@ const $fa423858cf60d4ae$var$loadBackground = (element, assetAttr)=>{
  * @param {HTMLPictureElement} element - The picture element to load the asset for.
  * @param {string} assetAttr - The asset URL attribute value.
  * @param {string} assetAlt - The asset alt attribute value.
- */ const $fa423858cf60d4ae$var$loadPicture = (element, assetAttr, assetAlt)=>{
+ */ const $f85e789b098d4f3c$var$loadPicture = (element, assetAttr, assetAlt)=>{
     let img = element.querySelector("img");
     if (!img) {
         img = document.createElement("img");
         element.append(img);
     }
-    $fa423858cf60d4ae$var$loadImage(img, assetAttr, assetAlt);
+    $f85e789b098d4f3c$var$loadImage(img, assetAttr, assetAlt);
 };
 /**
  * Loads the asset for the given video element.
@@ -71,7 +71,7 @@ const $fa423858cf60d4ae$var$loadBackground = (element, assetAttr)=>{
  *
  * @param {HTMLVideoElement} element - The video element to load the asset for.
  * @param {string} assetAttr - The asset URL attribute value.
- */ const $fa423858cf60d4ae$var$loadVideo = (element, assetAttr)=>{
+ */ const $f85e789b098d4f3c$var$loadVideo = (element, assetAttr)=>{
     element.src = assetAttr;
 };
 /**
@@ -80,22 +80,23 @@ const $fa423858cf60d4ae$var$loadBackground = (element, assetAttr)=>{
  * @private
  *
  * @param {HTMLElement} element - The element to load the asset for.
- */ const $fa423858cf60d4ae$var$loadAsset = (element, options)=>{
+ */ const $f85e789b098d4f3c$var$loadAsset = (element, options)=>{
     const { tag: tag } = options;
+    const loadFunctions = {
+        img: $f85e789b098d4f3c$var$loadImage,
+        picture: $f85e789b098d4f3c$var$loadPicture,
+        video: $f85e789b098d4f3c$var$loadVideo
+    };
     const elementType = element.tagName.toLowerCase();
-    const isImage = elementType === "img";
-    const isPicture = elementType === "picture";
-    const isVideo = elementType === "video";
+    const loadFunction = loadFunctions[elementType];
     const assetAttr = element.getAttribute(`${tag}-src`);
     const assetAlt = element.getAttribute(`${tag}-alt`) || "";
     const backgroundAttr = element.getAttribute(`${tag}-background`);
-    if (backgroundAttr) return $fa423858cf60d4ae$var$loadBackground(element, backgroundAttr);
-    if (isImage) return $fa423858cf60d4ae$var$loadImage(element, assetAttr, assetAlt);
-    if (isPicture) return $fa423858cf60d4ae$var$loadPicture(element, assetAttr, assetAlt);
-    if (isVideo) return $fa423858cf60d4ae$var$loadVideo(element, assetAttr);
-    element.src = assetAttr;
+    if (backgroundAttr) return $f85e789b098d4f3c$var$loadBackground(element, backgroundAttr);
+    if (loadFunction) return loadFunction(element, assetAttr, assetAlt);
+    throw new Error(`Invalid element type: ${elementType}`);
 };
-var $fa423858cf60d4ae$export$2e2bcd8739ae039 = $fa423858cf60d4ae$var$loadAsset;
+var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
 
 
 /**
@@ -103,13 +104,13 @@ var $fa423858cf60d4ae$export$2e2bcd8739ae039 = $fa423858cf60d4ae$var$loadAsset;
  *
  * @param {string} [selector="[lazy]"] - The CSS selector for lazy loadable elements.
  * @param {Object} [settings={}] - Additional options for configuring the lazy loading behavior.
- */ const $82cbb5a2f3a1bcd0$var$lazyLoad = (settings = {})=>{
+ */ const $cf838c15c8b009ba$var$lazyLoad = (settings = {})=>{
     /**
    * Options object for configuring the lazy loading behavior.
    *
    * @type {Object}
    */ const options = {
-        ...(0, $db127449446b8099$export$2e2bcd8739ae039),
+        ...(0, $50e97065b94a2e88$export$2e2bcd8739ae039),
         ...settings
     };
     /**
@@ -124,7 +125,7 @@ var $fa423858cf60d4ae$export$2e2bcd8739ae039 = $fa423858cf60d4ae$var$loadAsset;
             if (!entry.isIntersecting) return;
             const { target: target } = entry;
             try {
-                (0, $fa423858cf60d4ae$export$2e2bcd8739ae039)(target, options);
+                (0, $f85e789b098d4f3c$export$2e2bcd8739ae039)(target, options);
                 options.onLoaded(target);
             } catch (error) {
                 options.onError(target, error);
@@ -145,7 +146,8 @@ var $fa423858cf60d4ae$export$2e2bcd8739ae039 = $fa423858cf60d4ae$var$loadAsset;
    */ const lazyLoadItems = document.querySelectorAll(options.selector);
     lazyLoadItems.forEach((item)=>observer.observe(item));
 };
-var $82cbb5a2f3a1bcd0$export$2e2bcd8739ae039 = $82cbb5a2f3a1bcd0$var$lazyLoad;
+var $cf838c15c8b009ba$export$2e2bcd8739ae039 = $cf838c15c8b009ba$var$lazyLoad;
 
 
-export {$82cbb5a2f3a1bcd0$export$2e2bcd8739ae039 as default};
+export {$cf838c15c8b009ba$export$2e2bcd8739ae039 as default};
+//# sourceMappingURL=lazy-load.js.map

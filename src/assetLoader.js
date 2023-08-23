@@ -55,22 +55,24 @@ const loadVideo = (element, assetAttr) => {
  */
 const loadAsset = (element, options) => {
   const { tag } = options;
-  const elementType = element.tagName.toLowerCase();
 
-  const isImage = elementType === 'img';
-  const isPicture = elementType === 'picture';
-  const isVideo = elementType === 'video';
+  const loadFunctions = {
+    img: loadImage,
+    picture: loadPicture,
+    video: loadVideo,
+  };
+
+  const elementType = element.tagName.toLowerCase();
+  const loadFunction = loadFunctions[elementType];
 
   const assetAttr = element.getAttribute(`${tag}-src`);
   const assetAlt = element.getAttribute(`${tag}-alt`) || '';
   const backgroundAttr = element.getAttribute(`${tag}-background`);
 
-  if (backgroundAttr) loadBackground(element, backgroundAttr);
-  if (isImage) loadImage(element, assetAttr, assetAlt);
-  if (isPicture) loadPicture(element, assetAttr, assetAlt);
-  if (isVideo) loadVideo(element, assetAttr);
+  if (backgroundAttr) return loadBackground(element, backgroundAttr);
+  if (loadFunction) return loadFunction(element, assetAttr, assetAlt);
 
-  element.src = assetAttr;
+  throw new Error(`Invalid element type: ${elementType}`);
 };
 
 export default loadAsset;
