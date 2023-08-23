@@ -24,6 +24,7 @@ const lazyLoad = (settings = {}) => {
    * @type {Object}
    */
   const options = { ...defaultOptions, ...settings };
+  const { onLoaded, onError, selector } = options;
 
   /**
    * Handles the intersection of lazy load elements.
@@ -34,8 +35,6 @@ const lazyLoad = (settings = {}) => {
    * @param {IntersectionObserver} observer - The intersection observer instance.
    */
   const handleIntersection = (entries, observer) => {
-    const { onLoaded, onError } = options;
-
     const handler = (entry) => {
       if (!entry.isIntersecting) return;
       const { target } = entry;
@@ -68,7 +67,7 @@ const lazyLoad = (settings = {}) => {
    *
    * @type {NodeList}
    */
-  const lazyLoadItems = document.querySelectorAll(options.selector);
+  const lazyLoadItems = document.querySelectorAll(selector);
 
   lazyLoadItems.forEach((item) => observer.observe(item));
 };

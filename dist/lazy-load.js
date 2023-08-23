@@ -16,7 +16,7 @@
  * @param {Function} [onLoaded] - Callback function to execute when an element is successfully loaded.
  * @param {Function} [onError] - Callback function to execute when an error occurs during loading.
  * @param {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
- */ const $50e97065b94a2e88$var$defaultOptions = {
+ */ const $50e97065b94a2e88$var$options = {
     tag: "lazy",
     selector: "[lazy]",
     toggleClass: "-loaded",
@@ -30,7 +30,7 @@
         rootMargin: "100% 0px"
     }
 };
-var $50e97065b94a2e88$export$2e2bcd8739ae039 = $50e97065b94a2e88$var$defaultOptions;
+var $50e97065b94a2e88$export$2e2bcd8739ae039 = $50e97065b94a2e88$var$options;
 
 
 /**
@@ -113,6 +113,7 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
         ...(0, $50e97065b94a2e88$export$2e2bcd8739ae039),
         ...settings
     };
+    const { onLoaded: onLoaded, onError: onError, selector: selector } = options;
     /**
    * Handles the intersection of lazy load elements.
    *
@@ -121,7 +122,6 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
    * @param {IntersectionObserverEntry[]} entries - The entries for the intersection observer.
    * @param {IntersectionObserver} observer - The intersection observer instance.
    */ const handleIntersection = (entries, observer)=>{
-        const { onLoaded: onLoaded, onError: onError } = options;
         const handler = (entry)=>{
             if (!entry.isIntersecting) return;
             const { target: target } = entry;
@@ -145,7 +145,7 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
    * NodeList of lazy loadable elements.
    *
    * @type {NodeList}
-   */ const lazyLoadItems = document.querySelectorAll(options.selector);
+   */ const lazyLoadItems = document.querySelectorAll(selector);
     lazyLoadItems.forEach((item)=>observer.observe(item));
 };
 var $cf838c15c8b009ba$export$2e2bcd8739ae039 = $cf838c15c8b009ba$var$lazyLoad;
