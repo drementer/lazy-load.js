@@ -38,15 +38,15 @@ var $50e97065b94a2e88$export$2e2bcd8739ae039 = $50e97065b94a2e88$var$defaultOpti
  *
  * @private
  *
- * @param {HTMLImageElement} img - The image element to load the asset for.
- * @param {string} assetAttr - The asset URL attribute value.
- * @param {string} assetAlt - The asset alt attribute value.
- */ const $f85e789b098d4f3c$var$loadImage = (img, assetAttr, assetAlt)=>{
-    img.src = assetAttr;
-    img.alt = assetAlt;
+ * @param {HTMLImageElement} element - The image element to load the asset for.
+ * @param {string} src - The asset path attribute value.
+ * @param {string} alt - The asset alt attribute value.
+ */ const $f85e789b098d4f3c$var$loadImage = (element, src, alt)=>{
+    element.src = src;
+    element.alt = alt;
 };
-const $f85e789b098d4f3c$var$loadBackground = (element, assetAttr)=>{
-    element.style.background = `url(${assetAttr})`;
+const $f85e789b098d4f3c$var$loadBackground = (element, src)=>{
+    element.style.background = `url(${src})`;
 };
 /**
  * Loads the asset for the given picture element.
@@ -54,15 +54,15 @@ const $f85e789b098d4f3c$var$loadBackground = (element, assetAttr)=>{
  * @private
  *
  * @param {HTMLPictureElement} element - The picture element to load the asset for.
- * @param {string} assetAttr - The asset URL attribute value.
- * @param {string} assetAlt - The asset alt attribute value.
- */ const $f85e789b098d4f3c$var$loadPicture = (element, assetAttr, assetAlt)=>{
+ * @param {string} src - The asset URL attribute value.
+ * @param {string} alt - The asset alt attribute value.
+ */ const $f85e789b098d4f3c$var$loadPicture = (element, src, alt)=>{
     let img = element.querySelector("img");
     if (!img) {
         img = document.createElement("img");
         element.append(img);
     }
-    $f85e789b098d4f3c$var$loadImage(img, assetAttr, assetAlt);
+    $f85e789b098d4f3c$var$loadImage(img, src, alt);
 };
 /**
  * Loads the asset for the given video element.
@@ -70,9 +70,9 @@ const $f85e789b098d4f3c$var$loadBackground = (element, assetAttr)=>{
  * @private
  *
  * @param {HTMLVideoElement} element - The video element to load the asset for.
- * @param {string} assetAttr - The asset URL attribute value.
- */ const $f85e789b098d4f3c$var$loadVideo = (element, assetAttr)=>{
-    element.src = assetAttr;
+ * @param {string} src - The asset URL attribute value.
+ */ const $f85e789b098d4f3c$var$loadVideo = (element, src)=>{
+    element.src = src;
 };
 /**
  * Loads the asset for the given element based on its type (img, picture, video).

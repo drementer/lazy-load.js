@@ -3,17 +3,17 @@
  *
  * @private
  *
- * @param {HTMLImageElement} img - The image element to load the asset for.
- * @param {string} assetAttr - The asset URL attribute value.
- * @param {string} assetAlt - The asset alt attribute value.
+ * @param {HTMLImageElement} element - The image element to load the asset for.
+ * @param {string} src - The asset path attribute value.
+ * @param {string} alt - The asset alt attribute value.
  */
-const loadImage = (img, assetAttr, assetAlt) => {
-  img.src = assetAttr;
-  img.alt = assetAlt;
+const loadImage = (element, src, alt) => {
+  element.src = src;
+  element.alt = alt;
 };
 
-const loadBackground = (element, assetAttr) => {
-  element.style.background = `url(${assetAttr})`;
+const loadBackground = (element, src) => {
+  element.style.background = `url(${src})`;
 };
 
 /**
@@ -22,16 +22,18 @@ const loadBackground = (element, assetAttr) => {
  * @private
  *
  * @param {HTMLPictureElement} element - The picture element to load the asset for.
- * @param {string} assetAttr - The asset URL attribute value.
- * @param {string} assetAlt - The asset alt attribute value.
+ * @param {string} src - The asset URL attribute value.
+ * @param {string} alt - The asset alt attribute value.
  */
-const loadPicture = (element, assetAttr, assetAlt) => {
+const loadPicture = (element, src, alt) => {
   let img = element.querySelector('img');
+
   if (!img) {
     img = document.createElement('img');
     element.append(img);
   }
-  loadImage(img, assetAttr, assetAlt);
+
+  loadImage(img, src, alt);
 };
 
 /**
@@ -40,10 +42,10 @@ const loadPicture = (element, assetAttr, assetAlt) => {
  * @private
  *
  * @param {HTMLVideoElement} element - The video element to load the asset for.
- * @param {string} assetAttr - The asset URL attribute value.
+ * @param {string} src - The asset URL attribute value.
  */
-const loadVideo = (element, assetAttr) => {
-  element.src = assetAttr;
+const loadVideo = (element, src) => {
+  element.src = src;
 };
 
 /**
