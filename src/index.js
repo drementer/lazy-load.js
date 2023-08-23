@@ -34,19 +34,23 @@ const lazyLoad = (settings = {}) => {
    * @param {IntersectionObserver} observer - The intersection observer instance.
    */
   const handleIntersection = (entries, observer) => {
-    entries.forEach((entry) => {
+    const { onLoaded, onError } = options;
+
+    const handler = (entry) => {
       if (!entry.isIntersecting) return;
       const { target } = entry;
 
       try {
         loadAsset(target, options);
-        options.onLoaded(target);
+        onLoaded(target);
       } catch (error) {
-        options.onError(target, error);
+        onError(target, error);
       } finally {
         observer.unobserve(target); // bunun tam testini yapmak lazim
       }
-    });
+    };
+
+    entries.forEach(handler);
   };
 
   /**

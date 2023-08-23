@@ -121,18 +121,20 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
    * @param {IntersectionObserverEntry[]} entries - The entries for the intersection observer.
    * @param {IntersectionObserver} observer - The intersection observer instance.
    */ const handleIntersection = (entries, observer)=>{
-        entries.forEach((entry)=>{
+        const { onLoaded: onLoaded, onError: onError } = options;
+        const handler = (entry)=>{
             if (!entry.isIntersecting) return;
             const { target: target } = entry;
             try {
                 (0, $f85e789b098d4f3c$export$2e2bcd8739ae039)(target, options);
-                options.onLoaded(target);
+                onLoaded(target);
             } catch (error) {
-                options.onError(target, error);
+                onError(target, error);
             } finally{
                 observer.unobserve(target); // bunun tam testini yapmak lazim
             }
-        });
+        };
+        entries.forEach(handler);
     };
     /**
    * IntersectionObserver used for lazy loading.
