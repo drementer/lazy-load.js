@@ -9,7 +9,7 @@
  * @param {Function} [onError] - Callback function to execute when an error occurs during loading.
  * @param {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
  */
-const defaultOptions = {
+const options = {
   tag: 'lazy',
   selector: '[lazy]',
   toggleClass: '-loaded',
@@ -24,4 +24,4 @@ const defaultOptions = {
   },
 };
 
-export default defaultOptions;
+export default options;
