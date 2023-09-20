@@ -36,8 +36,8 @@ const lazyLoad = (settings = {}) => {
    */
   const handleIntersection = (entries, observer) => {
     const handler = (entry) => {
-      if (!entry.isIntersecting) return;
-      const { target } = entry;
+      const { target, isIntersecting } = entry;
+      if (!isIntersecting) return;
 
       try {
         loadAsset(target, options);
