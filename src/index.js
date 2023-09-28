@@ -14,7 +14,6 @@ import loadAsset from './assetLoader.js';
 /**
  * Lazy load assets.
  *
- * @param {string} [selector="[lazy]"] - The CSS selector for lazy loadable elements.
  * @param {Object} [customOptions={}] - Additional options for configuring the lazy loading behavior.
  */
 const lazyLoad = (customOptions = {}) => {
