@@ -23,7 +23,7 @@ const options = {
   observer: {
     root: null,
     threshold: 1,
-    rootMargin: '100% 0px', // Burayı daha detalı araştırmam gerek
+    rootMargin: '100% 0px',
   },
 };
 
