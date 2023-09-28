@@ -13,6 +13,9 @@ const options = {
   get selector() {
     return `[${this.tag}]`;
   },
+  get altAttribute() {
+    return `${this.tag}-alt`;
+  },
 
   tag: 'lazy',
   toggleClass: '-loaded',
