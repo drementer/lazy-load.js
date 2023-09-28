@@ -18,7 +18,10 @@ const options = {
   },
 
   tag: 'lazy',
-  toggleClass: '-loaded',
+  modifiers: {
+    loaded: '-loaded',
+    loading: '-loading',
+  },
   onLoaded: () => {},
   onError: (element, error) => {
     console.error('🚀 Error on ~ element, error:', element, error);
