@@ -7,9 +7,9 @@
  * @param {string} src - The asset path attribute value.
  * @param {string} alt - The asset alt attribute value.
  */
-const loadImage = (element, src, alt) => {
+const loadImage = (element, src, alt = null) => {
   element.src = src;
-  element.alt = alt;
+  if (alt) element.alt = alt;
 };
 
 const loadBackground = (element, src) => {
