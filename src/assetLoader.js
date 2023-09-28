@@ -56,25 +56,21 @@ const loadVideo = (element, src) => {
  * @param {HTMLElement} element - The element to load the asset for.
  */
 const loadAsset = (element, options) => {
-  const { tag } = options;
+  const { tag, altAttr } = options;
 
-  const loadFunctions = {
+  const assetLoaders = {
     img: loadImage,
     picture: loadPicture,
     video: loadVideo,
   };
 
   const elementType = element.tagName.toLowerCase();
-  const loadFunction = loadFunctions[elementType];
+  const assetLoader = assetLoaders[elementType];
 
-  const assetAttr = element.getAttribute(`${tag}-src`);
-  const assetAlt = element.getAttribute(`${tag}-alt`) || '';
-  const backgroundAttr = element.getAttribute(`${tag}-background`);
+  const assetPath = element.getAttribute(tag);
+  const assetAltValue = element.getAttribute(altAttr);
 
-  if (backgroundAttr) return loadBackground(element, backgroundAttr);
-  if (loadFunction) return loadFunction(element, assetAttr, assetAlt);
-
-  throw new Error(`Invalid element type: ${elementType}`);
+  assetLoader(element, assetPath, assetAltValue);
 };
 
 export default loadAsset;
