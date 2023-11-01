@@ -39,8 +39,8 @@ const lazyLoad = (customOptions = {}) => {
       if (!isIntersecting) return;
 
       try {
+				loadAsset(target, options);
         onLoaded(target);
-        loadAsset(target, options);
       } catch (error) {
         onError(target, error);
       } finally {
