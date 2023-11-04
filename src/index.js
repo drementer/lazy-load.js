@@ -10,6 +10,7 @@
 
 import defaultSettings from './settings.js';
 import loadAsset from './assetLoader.js';
+import observer from './observer.js';
 
 /**
  * Lazy load assets.
@@ -27,39 +28,17 @@ const lazyLoad = (tag = 'lazy', customSettings = {}) => {
   const settings = { ...defaultSettings, ...customSettings };
 
   /**
-   * Handles the intersection of lazy load elements.
+   * Callback function for the observer. Tries to load the asset and handles any errors.
    *
-   * @private
-   *
-   * @param {IntersectionObserverEntry[]} entries - The entries for the intersection observer.
-   * @param {IntersectionObserver} observer - The intersection observer instance.
+   * @param {HTMLElement} target - The HTML element to load the asset for.
    */
-  const handleIntersection = (entries, observer) => {
-    const handler = (entry) => {
-      const { target, isIntersecting } = entry;
-      if (!isIntersecting) return;
-
-      try {
-        loadAsset(target, settings);
-      } catch (error) {
-        settings.onError(target, error);
-      } finally {
-        observer.unobserve(target); // bunun tam testini yapmak lazim
-      }
-    };
-
-    entries.forEach(handler);
+  const observeCallback = (target) => {
+    try {
+      loadAsset(target, settings);
+    } catch (error) {
+      settings.onError(target, error.message);
+    }
   };
-
-  /**
-   * IntersectionObserver used for lazy loading.
-   *
-   * @type {IntersectionObserver}
-   */
-  const observer = new IntersectionObserver(
-    handleIntersection,
-    settings.observer
-  );
 
   /**
    * NodeList of lazy loadable elements.
@@ -68,13 +47,14 @@ const lazyLoad = (tag = 'lazy', customSettings = {}) => {
    */
   const lazyLoadItems = document.querySelectorAll(settings.selector);
 
-
   if (!lazyLoadItems.length) {
-    console.warn('🚀 No lazy loadable element found.');
+    console.warn('No lazy loadable element found!');
     return;
   }
 
-  lazyLoadItems.forEach((item) => observer.observe(item));
+  lazyLoadItems.forEach((item) =>
+    observer(item, settings.observer, observeCallback)
+  );
 };
 
 export default lazyLoad;
