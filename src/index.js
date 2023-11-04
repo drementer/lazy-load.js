@@ -41,7 +41,7 @@ const lazyLoad = (tag = 'lazy', customOptions = {}) => {
 
       try {
         loadAsset(target, options);
-        options.onLoaded(target);
+				options.onLoaded(target);
       } catch (error) {
         options.onError(target, error);
         console.error(error);
@@ -69,6 +69,12 @@ const lazyLoad = (tag = 'lazy', customOptions = {}) => {
    * @type {NodeList}
    */
   const lazyLoadItems = document.querySelectorAll(options.selector);
+
+
+  if (!lazyLoadItems.length) {
+    console.warn('🚀 No lazy loadable element found.');
+    return;
+  }
 
   lazyLoadItems.forEach((item) => observer.observe(item));
 };
