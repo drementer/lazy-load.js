@@ -23,7 +23,6 @@ const lazyLoad = (customOptions = {}) => {
    * @type {Object}
    */
   const options = { ...defaultOptions, ...customOptions };
-  const { onLoaded, onError, selector } = options;
 
   /**
    * Handles the intersection of lazy load elements.
@@ -39,10 +38,10 @@ const lazyLoad = (customOptions = {}) => {
       if (!isIntersecting) return;
 
       try {
-				loadAsset(target, options);
-        onLoaded(target);
+        loadAsset(target, options);
+        options.onLoaded(target);
       } catch (error) {
-        onError(target, error);
+        options.onError(target, error);
       } finally {
         observer.unobserve(target); // bunun tam testini yapmak lazim
       }
@@ -66,7 +65,7 @@ const lazyLoad = (customOptions = {}) => {
    *
    * @type {NodeList}
    */
-  const lazyLoadItems = document.querySelectorAll(selector);
+  const lazyLoadItems = document.querySelectorAll(options.selector);
 
   lazyLoadItems.forEach((item) => observer.observe(item));
 };
