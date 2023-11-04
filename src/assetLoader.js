@@ -12,10 +12,6 @@ const loadImage = (element, src, alt = null) => {
   if (alt) element.alt = alt;
 };
 
-const loadBackground = (element, src) => {
-  element.style.background = `url(${src})`;
-};
-
 /**
  * Loads the asset for the given picture element.
  *
