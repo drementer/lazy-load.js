@@ -41,10 +41,8 @@ const lazyLoad = (tag = 'lazy', customOptions = {}) => {
 
       try {
         loadAsset(target, options);
-				options.onLoaded(target);
       } catch (error) {
         options.onError(target, error);
-        console.error(error);
       } finally {
         observer.unobserve(target); // bunun tam testini yapmak lazim
       }
