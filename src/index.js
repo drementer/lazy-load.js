@@ -16,7 +16,9 @@ import loadAsset from './assetLoader.js';
  *
  * @param {Object} [customOptions={}] - Additional options for configuring the lazy loading behavior.
  */
-const lazyLoad = (customOptions = {}) => {
+const lazyLoad = (tag = 'lazy', customOptions = {}) => {
+  defaultOptions.tag = tag;
+
   /**
    * Options object for configuring the lazy loading behavior.
    *

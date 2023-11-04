@@ -17,9 +17,17 @@
  * @param {Function} [onError] - Callback function to execute when an error occurs during loading.
  * @param {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
  */ const $50e97065b94a2e88$var$options = {
-    tag: "lazy",
-    selector: "[lazy]",
-    toggleClass: "-loaded",
+    get selector () {
+        return `[${this.tag}]`;
+    },
+    get altAttribute () {
+        return `${this.tag}-alt`;
+    },
+    tag: null,
+    modifiers: {
+        loaded: "-loaded",
+        loading: "-loading"
+    },
     onLoaded: ()=>{},
     onError: (element, error)=>{
         console.error("\uD83D\uDE80 Error on ~ element, error:", element, error);
@@ -41,9 +49,9 @@ var $50e97065b94a2e88$export$2e2bcd8739ae039 = $50e97065b94a2e88$var$options;
  * @param {HTMLImageElement} element - The image element to load the asset for.
  * @param {string} src - The asset path attribute value.
  * @param {string} alt - The asset alt attribute value.
- */ const $f85e789b098d4f3c$var$loadImage = (element, src, alt)=>{
+ */ const $f85e789b098d4f3c$var$loadImage = (element, src, alt = null)=>{
     element.src = src;
-    element.alt = alt;
+    if (alt) element.alt = alt;
 };
 const $f85e789b098d4f3c$var$loadBackground = (element, src)=>{
     element.style.background = `url(${src})`;
@@ -81,20 +89,17 @@ const $f85e789b098d4f3c$var$loadBackground = (element, src)=>{
  *
  * @param {HTMLElement} element - The element to load the asset for.
  */ const $f85e789b098d4f3c$var$loadAsset = (element, options)=>{
-    const { tag: tag } = options;
-    const loadFunctions = {
+    const { tag: tag, altAttr: altAttr } = options;
+    const assetLoaders = {
         img: $f85e789b098d4f3c$var$loadImage,
         picture: $f85e789b098d4f3c$var$loadPicture,
         video: $f85e789b098d4f3c$var$loadVideo
     };
     const elementType = element.tagName.toLowerCase();
-    const loadFunction = loadFunctions[elementType];
-    const assetAttr = element.getAttribute(`${tag}-src`);
-    const assetAlt = element.getAttribute(`${tag}-alt`) || "";
-    const backgroundAttr = element.getAttribute(`${tag}-background`);
-    if (backgroundAttr) return $f85e789b098d4f3c$var$loadBackground(element, backgroundAttr);
-    if (loadFunction) return loadFunction(element, assetAttr, assetAlt);
-    throw new Error(`Invalid element type: ${elementType}`);
+    const assetLoader = assetLoaders[elementType];
+    const assetPath = element.getAttribute(tag);
+    const assetAltValue = element.getAttribute(altAttr);
+    assetLoader(element, assetPath, assetAltValue);
 };
 var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
 
@@ -102,18 +107,17 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
 /**
  * Lazy load assets.
  *
- * @param {string} [selector="[lazy]"] - The CSS selector for lazy loadable elements.
- * @param {Object} [settings={}] - Additional options for configuring the lazy loading behavior.
- */ const $cf838c15c8b009ba$var$lazyLoad = (settings = {})=>{
+ * @param {Object} [customOptions={}] - Additional options for configuring the lazy loading behavior.
+ */ const $cf838c15c8b009ba$var$lazyLoad = (tag = "lazy", customOptions = {})=>{
+    (0, $50e97065b94a2e88$export$2e2bcd8739ae039).tag = tag;
     /**
    * Options object for configuring the lazy loading behavior.
    *
    * @type {Object}
    */ const options = {
         ...(0, $50e97065b94a2e88$export$2e2bcd8739ae039),
-        ...settings
+        ...customOptions
     };
-    const { onLoaded: onLoaded, onError: onError, selector: selector } = options;
     /**
    * Handles the intersection of lazy load elements.
    *
@@ -123,13 +127,13 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
    * @param {IntersectionObserver} observer - The intersection observer instance.
    */ const handleIntersection = (entries, observer)=>{
         const handler = (entry)=>{
-            if (!entry.isIntersecting) return;
-            const { target: target } = entry;
+            const { target: target, isIntersecting: isIntersecting } = entry;
+            if (!isIntersecting) return;
             try {
                 (0, $f85e789b098d4f3c$export$2e2bcd8739ae039)(target, options);
-                onLoaded(target);
+                options.onLoaded(target);
             } catch (error) {
-                onError(target, error);
+                options.onError(target, error);
             } finally{
                 observer.unobserve(target); // bunun tam testini yapmak lazim
             }
@@ -145,7 +149,7 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
    * NodeList of lazy loadable elements.
    *
    * @type {NodeList}
-   */ const lazyLoadItems = document.querySelectorAll(selector);
+   */ const lazyLoadItems = document.querySelectorAll(options.selector);
     lazyLoadItems.forEach((item)=>observer.observe(item));
 };
 var $cf838c15c8b009ba$export$2e2bcd8739ae039 = $cf838c15c8b009ba$var$lazyLoad;

@@ -17,7 +17,7 @@ const options = {
     return `${this.tag}-alt`;
   },
 
-  tag: 'lazy',
+  tag: null,
   modifiers: {
     loaded: '-loaded',
     loading: '-loading',
