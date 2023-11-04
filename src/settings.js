@@ -29,7 +29,7 @@ const settings = {
   },
   onLoaded: (element) => {},
   onError: (element, error) => {
-    console.error('🚀 Error on ~ element, error:', element, error);
+    console.warn('Error on ~ element, error:', element, error);
   },
   observer: {
     root: null,
