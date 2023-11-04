@@ -60,6 +60,13 @@ const loadAsset = (element, options) => {
     video: loadVideo,
   };
 
+  const handleLoadEvent = () => {
+    element.classList.remove(options.modifiers.loading);
+    element.removeAttribute(options.tag);
+    element.classList.add(options.modifiers.loaded);
+    options.onLoaded(element);
+  };
+
   const elementType = element.tagName.toLowerCase();
   const assetLoader = assetLoaders[elementType];
 
@@ -67,6 +74,8 @@ const loadAsset = (element, options) => {
   const assetAltValue = element.getAttribute(altAttr);
 
   assetLoader(element, assetPath, assetAltValue);
+  element.classList.add(options.modifiers.loading);
+  element.addEventListener('load', handleLoadEvent);
 };
 
 export default loadAsset;
