@@ -55,9 +55,9 @@ const loadVideo = (element, src) => {
  * @property {function} video - To load a video.
  */
 const assetLoaders = {
-	img: loadImage,
-	picture: loadPicture,
-	video: loadVideo,
+  img: loadImage,
+  picture: loadPicture,
+  video: loadVideo,
 };
 
 /**
@@ -79,11 +79,13 @@ const loadAsset = (element, settings) => {
     element.removeEventListener('load', handleLoadEvent);
   };
 
+  const assetPath = element.getAttribute(tag);
+  const assetAltValue = element.getAttribute(altAttr);
+
   const elementType = element.tagName.toLowerCase();
   const assetLoader = assetLoaders[elementType];
 
-  const assetPath = element.getAttribute(tag);
-  const assetAltValue = element.getAttribute(altAttr);
+	if (!assetLoader) throw new Error(`Element type '${elementType}' is not supported!`);
 
   assetLoader(element, assetPath, assetAltValue);
   element.classList.add(settings.modifiers.loading);
