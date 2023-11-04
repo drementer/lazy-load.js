@@ -1,5 +1,5 @@
 /**
- * Default options for lazy loading behavior.
+ * Default settings for lazy loading behavior.
  *
  * @type {Object}
  *
@@ -13,7 +13,7 @@
  * @property {Function} [onError] - Callback function to execute when an error occurs during loading.
  * @property {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
  */
-const options = {
+const settings = {
   get selector() {
     return `[${this.tag}]`;
   },
@@ -38,4 +38,4 @@ const options = {
   },
 };
 
-export default options;
+export default settings;

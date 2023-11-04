@@ -8,23 +8,23 @@
  * @see {@link https://github.com/drementer/lazy-load.js}
  */
 
-import defaultOptions from './options.js';
+import defaultSettings from './settings.js';
 import loadAsset from './assetLoader.js';
 
 /**
  * Lazy load assets.
  *
- * @param {Object} [customOptions={}] - Additional options for configuring the lazy loading behavior.
+ * @param {Object} [customSettings={}] - Additional options for configuring the lazy loading behavior.
  */
-const lazyLoad = (tag = 'lazy', customOptions = {}) => {
-  defaultOptions.tag = tag;
+const lazyLoad = (tag = 'lazy', customSettings = {}) => {
+  defaultSettings.tag = tag;
 
   /**
-   * Options object for configuring the lazy loading behavior.
+   * Settings object for configuring the lazy loading behavior.
    *
    * @type {Object}
    */
-  const options = { ...defaultOptions, ...customOptions };
+  const settings = { ...defaultSettings, ...customSettings };
 
   /**
    * Handles the intersection of lazy load elements.
@@ -40,9 +40,9 @@ const lazyLoad = (tag = 'lazy', customOptions = {}) => {
       if (!isIntersecting) return;
 
       try {
-        loadAsset(target, options);
+        loadAsset(target, settings);
       } catch (error) {
-        options.onError(target, error);
+        settings.onError(target, error);
       } finally {
         observer.unobserve(target); // bunun tam testini yapmak lazim
       }
@@ -58,7 +58,7 @@ const lazyLoad = (tag = 'lazy', customOptions = {}) => {
    */
   const observer = new IntersectionObserver(
     handleIntersection,
-    options.observer
+    settings.observer
   );
 
   /**
@@ -66,7 +66,7 @@ const lazyLoad = (tag = 'lazy', customOptions = {}) => {
    *
    * @type {NodeList}
    */
-  const lazyLoadItems = document.querySelectorAll(options.selector);
+  const lazyLoadItems = document.querySelectorAll(settings.selector);
 
 
   if (!lazyLoadItems.length) {

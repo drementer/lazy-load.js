@@ -67,14 +67,14 @@ const assetLoaders = {
  *
  * @param {HTMLElement} element - The element to load the asset for.
  */
-const loadAsset = (element, options) => {
-  const { tag, altAttr } = options;
+const loadAsset = (element, settings) => {
+  const { tag, altAttr } = settings;
 
   const handleLoadEvent = () => {
-    element.classList.remove(options.modifiers.loading);
-    element.removeAttribute(options.tag);
-    element.classList.add(options.modifiers.loaded);
-    options.onLoaded(element);
+    element.classList.remove(settings.modifiers.loading);
+    element.removeAttribute(settings.tag);
+    element.classList.add(settings.modifiers.loaded);
+    settings.onLoaded(element);
 
     element.removeEventListener('load', handleLoadEvent);
   };
@@ -86,7 +86,7 @@ const loadAsset = (element, options) => {
   const assetAltValue = element.getAttribute(altAttr);
 
   assetLoader(element, assetPath, assetAltValue);
-  element.classList.add(options.modifiers.loading);
+  element.classList.add(settings.modifiers.loading);
   element.addEventListener('load', handleLoadEvent);
 };
 
