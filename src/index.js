@@ -3,7 +3,7 @@
  *
  * @author drementer
  * @module lazyLoad
- * @version 1.0.6
+ * @version 1.0.7
  * @license MIT
  * @see {@link https://github.com/drementer/lazy-load.js}
  */
