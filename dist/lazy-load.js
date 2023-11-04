@@ -16,7 +16,7 @@
  * @param {Function} [onLoaded] - Callback function to execute when an element is successfully loaded.
  * @param {Function} [onError] - Callback function to execute when an error occurs during loading.
  * @param {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
- */ const $50e97065b94a2e88$var$options = {
+ */ const $db127449446b8099$var$options = {
     get selector () {
         return `[${this.tag}]`;
     },
@@ -28,7 +28,7 @@
         loaded: "-loaded",
         loading: "-loading"
     },
-    onLoaded: ()=>{},
+    onLoaded: (element)=>{},
     onError: (element, error)=>{
         console.error("\uD83D\uDE80 Error on ~ element, error:", element, error);
     },
@@ -38,7 +38,7 @@
         rootMargin: "100% 0px"
     }
 };
-var $50e97065b94a2e88$export$2e2bcd8739ae039 = $50e97065b94a2e88$var$options;
+var $db127449446b8099$export$2e2bcd8739ae039 = $db127449446b8099$var$options;
 
 
 /**
@@ -49,12 +49,9 @@ var $50e97065b94a2e88$export$2e2bcd8739ae039 = $50e97065b94a2e88$var$options;
  * @param {HTMLImageElement} element - The image element to load the asset for.
  * @param {string} src - The asset path attribute value.
  * @param {string} alt - The asset alt attribute value.
- */ const $f85e789b098d4f3c$var$loadImage = (element, src, alt = null)=>{
+ */ const $fa423858cf60d4ae$var$loadImage = (element, src, alt = null)=>{
     element.src = src;
     if (alt) element.alt = alt;
-};
-const $f85e789b098d4f3c$var$loadBackground = (element, src)=>{
-    element.style.background = `url(${src})`;
 };
 /**
  * Loads the asset for the given picture element.
@@ -64,13 +61,13 @@ const $f85e789b098d4f3c$var$loadBackground = (element, src)=>{
  * @param {HTMLPictureElement} element - The picture element to load the asset for.
  * @param {string} src - The asset URL attribute value.
  * @param {string} alt - The asset alt attribute value.
- */ const $f85e789b098d4f3c$var$loadPicture = (element, src, alt)=>{
+ */ const $fa423858cf60d4ae$var$loadPicture = (element, src, alt)=>{
     let img = element.querySelector("img");
     if (!img) {
         img = document.createElement("img");
         element.append(img);
     }
-    $f85e789b098d4f3c$var$loadImage(img, src, alt);
+    $fa423858cf60d4ae$var$loadImage(img, src, alt);
 };
 /**
  * Loads the asset for the given video element.
@@ -79,7 +76,7 @@ const $f85e789b098d4f3c$var$loadBackground = (element, src)=>{
  *
  * @param {HTMLVideoElement} element - The video element to load the asset for.
  * @param {string} src - The asset URL attribute value.
- */ const $f85e789b098d4f3c$var$loadVideo = (element, src)=>{
+ */ const $fa423858cf60d4ae$var$loadVideo = (element, src)=>{
     element.src = src;
 };
 /**
@@ -88,34 +85,43 @@ const $f85e789b098d4f3c$var$loadBackground = (element, src)=>{
  * @private
  *
  * @param {HTMLElement} element - The element to load the asset for.
- */ const $f85e789b098d4f3c$var$loadAsset = (element, options)=>{
+ */ const $fa423858cf60d4ae$var$loadAsset = (element, options)=>{
     const { tag: tag, altAttr: altAttr } = options;
     const assetLoaders = {
-        img: $f85e789b098d4f3c$var$loadImage,
-        picture: $f85e789b098d4f3c$var$loadPicture,
-        video: $f85e789b098d4f3c$var$loadVideo
+        img: $fa423858cf60d4ae$var$loadImage,
+        picture: $fa423858cf60d4ae$var$loadPicture,
+        video: $fa423858cf60d4ae$var$loadVideo
+    };
+    const handleLoadEvent = ()=>{
+        element.classList.remove(options.modifiers.loading);
+        element.removeAttribute(options.tag);
+        element.classList.add(options.modifiers.loaded);
+        options.onLoaded(element);
+        element.removeEventListener("load", handleLoadEvent);
     };
     const elementType = element.tagName.toLowerCase();
     const assetLoader = assetLoaders[elementType];
     const assetPath = element.getAttribute(tag);
     const assetAltValue = element.getAttribute(altAttr);
     assetLoader(element, assetPath, assetAltValue);
+    element.classList.add(options.modifiers.loading);
+    element.addEventListener("load", handleLoadEvent);
 };
-var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
+var $fa423858cf60d4ae$export$2e2bcd8739ae039 = $fa423858cf60d4ae$var$loadAsset;
 
 
 /**
  * Lazy load assets.
  *
  * @param {Object} [customOptions={}] - Additional options for configuring the lazy loading behavior.
- */ const $cf838c15c8b009ba$var$lazyLoad = (tag = "lazy", customOptions = {})=>{
-    (0, $50e97065b94a2e88$export$2e2bcd8739ae039).tag = tag;
+ */ const $82cbb5a2f3a1bcd0$var$lazyLoad = (tag = "lazy", customOptions = {})=>{
+    (0, $db127449446b8099$export$2e2bcd8739ae039).tag = tag;
     /**
    * Options object for configuring the lazy loading behavior.
    *
    * @type {Object}
    */ const options = {
-        ...(0, $50e97065b94a2e88$export$2e2bcd8739ae039),
+        ...(0, $db127449446b8099$export$2e2bcd8739ae039),
         ...customOptions
     };
     /**
@@ -130,11 +136,9 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
             const { target: target, isIntersecting: isIntersecting } = entry;
             if (!isIntersecting) return;
             try {
-                (0, $f85e789b098d4f3c$export$2e2bcd8739ae039)(target, options);
-                options.onLoaded(target);
+                (0, $fa423858cf60d4ae$export$2e2bcd8739ae039)(target, options);
             } catch (error) {
                 options.onError(target, error);
-                console.error(error);
             } finally{
                 observer.unobserve(target); // bunun tam testini yapmak lazim
             }
@@ -151,10 +155,13 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
    *
    * @type {NodeList}
    */ const lazyLoadItems = document.querySelectorAll(options.selector);
+    if (!lazyLoadItems.length) {
+        console.warn("\uD83D\uDE80 No lazy loadable element found.");
+        return;
+    }
     lazyLoadItems.forEach((item)=>observer.observe(item));
 };
-var $cf838c15c8b009ba$export$2e2bcd8739ae039 = $cf838c15c8b009ba$var$lazyLoad;
+var $82cbb5a2f3a1bcd0$export$2e2bcd8739ae039 = $82cbb5a2f3a1bcd0$var$lazyLoad;
 
 
-export {$cf838c15c8b009ba$export$2e2bcd8739ae039 as default};
-//# sourceMappingURL=lazy-load.js.map
+export {$82cbb5a2f3a1bcd0$export$2e2bcd8739ae039 as default};
