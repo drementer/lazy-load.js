@@ -134,6 +134,7 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = $f85e789b098d4f3c$var$loadAsset;
                 options.onLoaded(target);
             } catch (error) {
                 options.onError(target, error);
+                console.error(error);
             } finally{
                 observer.unobserve(target); // bunun tam testini yapmak lazim
             }
