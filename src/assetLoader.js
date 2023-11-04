@@ -65,6 +65,8 @@ const loadAsset = (element, options) => {
     element.removeAttribute(options.tag);
     element.classList.add(options.modifiers.loaded);
     options.onLoaded(element);
+
+    element.removeEventListener('load', handleLoadEvent);
   };
 
   const elementType = element.tagName.toLowerCase();
