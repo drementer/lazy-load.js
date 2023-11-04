@@ -5,11 +5,9 @@
  *
  * @param {HTMLImageElement} element - The image element to load the asset for.
  * @param {string} src - The asset path attribute value.
- * @param {string} alt - The asset alt attribute value.
  */
-const loadImage = (element, src, alt = null) => {
+const loadImage = (element, src) => {
   element.src = src;
-  if (alt) element.alt = alt;
 };
 
 /**
@@ -19,9 +17,8 @@ const loadImage = (element, src, alt = null) => {
  *
  * @param {HTMLPictureElement} element - The picture element to load the asset for.
  * @param {string} src - The asset URL attribute value.
- * @param {string} alt - The asset alt attribute value.
  */
-const loadPicture = (element, src, alt) => {
+const loadPicture = (element, src) => {
   let img = element.querySelector('img');
 
   if (!img) {
@@ -29,7 +26,7 @@ const loadPicture = (element, src, alt) => {
     element.append(img);
   }
 
-  loadImage(img, src, alt);
+  loadImage(img, src);
 };
 
 /**
@@ -66,8 +63,6 @@ const assetLoaders = {
  * @param {HTMLElement} element - The element to load the asset for.
  */
 const loadAsset = (element, settings) => {
-  const { tag, altAttr } = settings;
-
   const handleLoadEvent = () => {
     element.classList.remove(settings.modifiers.loading);
     element.removeAttribute(settings.tag);
@@ -77,15 +72,13 @@ const loadAsset = (element, settings) => {
     element.removeEventListener('load', handleLoadEvent);
   };
 
-  const assetPath = element.getAttribute(tag);
-  const assetAltValue = element.getAttribute(altAttr);
-
+  const assetPath = element.getAttribute(settings.tag);
   const elementType = element.tagName.toLowerCase();
   const assetLoader = assetLoaders[elementType];
 
 	if (!assetLoader) throw new Error(`Element type '${elementType}' is not supported!`);
 
-  assetLoader(element, assetPath, assetAltValue);
+  assetLoader(element, assetPath);
   element.classList.add(settings.modifiers.loading);
   element.addEventListener('load', handleLoadEvent);
 };

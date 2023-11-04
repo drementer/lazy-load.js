@@ -18,10 +18,6 @@ const settings = {
     return `[${this.tag}]`;
   },
 
-  get altAttribute() {
-    return `${this.tag}-alt`;
-  },
-
   tag: null,
   modifiers: {
     loaded: '-loaded',
