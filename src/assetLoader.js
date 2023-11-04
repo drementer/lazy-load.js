@@ -63,8 +63,6 @@ const assetLoaders = {
 /**
  * Loads the asset for the given element based on its type (img, picture, video).
  *
- * @private
- *
  * @param {HTMLElement} element - The element to load the asset for.
  */
 const loadAsset = (element, settings) => {
