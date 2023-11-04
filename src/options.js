@@ -22,7 +22,7 @@ const options = {
     loaded: '-loaded',
     loading: '-loading',
   },
-  onLoaded: () => {},
+  onLoaded: (element) => {},
   onError: (element, error) => {
     console.error('🚀 Error on ~ element, error:', element, error);
   },
