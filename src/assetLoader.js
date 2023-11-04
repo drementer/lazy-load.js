@@ -45,6 +45,22 @@ const loadVideo = (element, src) => {
 };
 
 /**
+ * A map of asset loaders by element type.
+ *
+ * @private
+ *
+ * @type {Object}
+ * @property {function} img - To load an image.
+ * @property {function} picture - To load a picture.
+ * @property {function} video - To load a video.
+ */
+const assetLoaders = {
+	img: loadImage,
+	picture: loadPicture,
+	video: loadVideo,
+};
+
+/**
  * Loads the asset for the given element based on its type (img, picture, video).
  *
  * @private
@@ -53,12 +69,6 @@ const loadVideo = (element, src) => {
  */
 const loadAsset = (element, options) => {
   const { tag, altAttr } = options;
-
-  const assetLoaders = {
-    img: loadImage,
-    picture: loadPicture,
-    video: loadVideo,
-  };
 
   const handleLoadEvent = () => {
     element.classList.remove(options.modifiers.loading);
