@@ -32,7 +32,7 @@ const lazyLoad = (tag = 'lazy', customSettings = {}) => {
    *
    * @param {HTMLElement} target - The HTML element to load the asset for.
    */
-  const observeCallback = (target) => {
+  const observerCallback = (target) => {
     try {
       loadAsset(target, settings);
     } catch (error) {
@@ -53,7 +53,7 @@ const lazyLoad = (tag = 'lazy', customSettings = {}) => {
   }
 
   lazyLoadItems.forEach((item) =>
-    observer(item, settings.observer, observeCallback)
+    observer(item, settings.observer, observerCallback)
   );
 };
 
