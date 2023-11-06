@@ -9,6 +9,7 @@ const defaultSettings = {
     loading: '-loading',
   },
   onLoaded: () => {},
+  onLoading: () => {},
   onError: (element, error) => {
     console.warn('Error on ~ element, error:', element, error);
   },

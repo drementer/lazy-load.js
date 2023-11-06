@@ -19,6 +19,7 @@ const lazyLoad = (selector, customSettings = {}) => {
 
   const observerCallback = (target) => {
     try {
+      settings.onLoading(target);
       loadAsset(target, settings);
     } catch (error) {
       settings.onError(target, error.message);
