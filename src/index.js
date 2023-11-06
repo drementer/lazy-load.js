@@ -11,21 +11,27 @@
 import defaultSettings from './settings.js';
 import loadAsset from './assetLoader.js';
 import observer from './observer.js';
+import { getElements } from './helpers.js';
 
 /**
  * Lazy load assets.
  *
  * @param {Object} [customSettings={}] - Additional options for configuring the lazy loading behavior.
  */
-const lazyLoad = (tag = 'lazy', customSettings = {}) => {
-  defaultSettings.tag = tag;
-
+const lazyLoad = (selector = 'lazy', customSettings = {}) => {
   /**
    * Settings object for configuring the lazy loading behavior.
    *
    * @type {Object}
    */
   const settings = { ...defaultSettings, ...customSettings };
+
+  /**
+   * NodeList of lazy loadable elements.
+   *
+   * @type {NodeList | Array}
+   */
+  const lazyItems = getElements(selector);
 
   /**
    * Callback function for the observer. Tries to load the asset and handles any errors.
@@ -40,19 +46,9 @@ const lazyLoad = (tag = 'lazy', customSettings = {}) => {
     }
   };
 
-  /**
-   * NodeList of lazy loadable elements.
-   *
-   * @type {NodeList}
-   */
-  const lazyLoadItems = document.querySelectorAll(settings.selector);
+  if (!lazyItems.length) return console.warn('No lazy loadable element found!');
 
-  if (!lazyLoadItems.length) {
-    console.warn('No lazy loadable element found!');
-    return;
-  }
-
-  lazyLoadItems.forEach((item) =>
+  lazyItems.forEach((item) =>
     observer(item, settings.observer, observerCallback)
   );
 };
