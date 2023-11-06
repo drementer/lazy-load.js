@@ -17,6 +17,8 @@ const lazyLoad = (selector, customSettings = {}) => {
   const settings = { ...defaultSettings, ...customSettings };
   const lazyItems = getElements(selector);
 
+  if (!lazyItems.length) return console.warn('No lazy loadable element found!');
+
   const observerCallback = (target) => {
     try {
       settings.onLoading(target);
@@ -25,8 +27,6 @@ const lazyLoad = (selector, customSettings = {}) => {
       settings.onError(target, error.message);
     }
   };
-
-  if (!lazyItems.length) return console.warn('No lazy loadable element found!');
 
   lazyItems.forEach((item) =>
     observer(item, observerCallback, settings.observer)
