@@ -49,7 +49,7 @@ const lazyLoad = (selector, customSettings = {}) => {
   if (!lazyItems.length) return console.warn('No lazy loadable element found!');
 
   lazyItems.forEach((item) =>
-    observer(item, settings.observer, observerCallback)
+    observer(item, observerCallback, settings.observer)
   );
 };
 
