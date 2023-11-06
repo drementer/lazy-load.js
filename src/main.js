@@ -33,15 +33,24 @@ const lazyLoad = (selector, customSettings = {}) => {
    */
   const lazyItems = getElements(selector);
 
+  /**
+   * Callback function for the observer. Tries to load the asset and handles any errors.
+   *
+   * @param {HTMLElement} target - The HTML element to load the asset for.
+   */
+  const observerCallback = (target) => {
+    try {
+      loadAsset(target, settings);
+    } catch (error) {
+      settings.onError(target, error.message);
+    }
+  };
+
   if (!lazyItems.length) return console.warn('No lazy loadable element found!');
 
-  try {
-    lazyItems.forEach((item) =>
-      observer(item, loadAsset(target, settings), settings.observer)
-    );
-  } catch (error) {
-    settings.onError(target, error.message);
-  }
+  lazyItems.forEach((item) =>
+    observer(item, settings.observer, observerCallback)
+  );
 };
 
 export default lazyLoad;
