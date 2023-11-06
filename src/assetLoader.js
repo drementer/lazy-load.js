@@ -97,7 +97,7 @@ const loadAsset = (element, settings) => {
 
   // Set the loading state and add the load event listener
   element.classList.add(settings.modifiers.loading);
-  element.onload = handleLoadEvent;
+  element.addEventListener('load', handleLoadEvent, { once: true });
 };
 
 export default loadAsset;
