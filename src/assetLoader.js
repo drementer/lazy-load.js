@@ -83,10 +83,13 @@ const loadAsset = (element, settings) => {
   // Callback to handle the load event
   const handleLoadEvent = () => {
     element.classList.remove(settings.modifiers.loading);
-    element.removeAttribute(settings.tag);
+
+    element.removeAttribute(settings.attrs.src);
+    element.removeAttribute(settings.attrs.srcset);
+    element.removeAttribute(settings.attrs.poster);
+
     element.classList.add(settings.modifiers.loaded);
     settings.onLoaded(element);
-    element.removeEventListener('load', handleLoadEvent);
   };
 
   // Execute the appropriate asset loader
@@ -94,7 +97,7 @@ const loadAsset = (element, settings) => {
 
   // Set the loading state and add the load event listener
   element.classList.add(settings.modifiers.loading);
-  element.addEventListener('load', handleLoadEvent);
+  element.onload = handleLoadEvent;
 };
 
 export default loadAsset;
