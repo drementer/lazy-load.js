@@ -4,11 +4,10 @@
  * @private
  *
  * @param {HTMLImageElement} element - The image element to load the asset for.
- * @param {string} src - The asset path attribute value.
+ * @param {Object} assets - The asset data.
  */
 const loadImage = (element, assets) => {
   element.src = assets.src;
-
   if (assets.srcset) element.srcset = assets.srcset;
 };
 
@@ -18,14 +17,14 @@ const loadImage = (element, assets) => {
  * @private
  *
  * @param {HTMLPictureElement} element - The picture element to load the asset for.
- * @param {string} src - The asset URL attribute value.
+ * @param {Object} assets - The asset data.
  */
 const loadPicture = (element, assets) => {
   let img = element.querySelector('img');
 
   if (!img) {
     img = document.createElement('img');
-    element.append(img);
+    element.appendChild(img);
   }
 
   loadImage(img, assets);
@@ -37,7 +36,7 @@ const loadPicture = (element, assets) => {
  * @private
  *
  * @param {HTMLVideoElement} element - The video element to load the asset for.
- * @param {string} src - The asset URL attribute value.
+ * @param {Object} assets - The asset data.
  */
 const loadVideo = (element, assets) => {
   element.src = assets.src;
@@ -51,9 +50,6 @@ const loadVideo = (element, assets) => {
  * @private
  *
  * @type {Object}
- * @property {function} img - To load an image.
- * @property {function} picture - To load a picture.
- * @property {function} video - To load a video.
  */
 const assetLoaders = {
   img: loadImage,
@@ -68,21 +64,15 @@ const assetLoaders = {
  * Loads the asset for the given element based on its type (img, picture, video).
  *
  * @param {HTMLElement} element - The element to load the asset for.
+ * @param {Object} settings - The configuration settings.
  */
 const loadAsset = (element, settings) => {
-  const handleLoadEvent = () => {
-    element.classList.remove(settings.modifiers.loading);
-    element.removeAttribute(settings.tag);
-    element.classList.add(settings.modifiers.loaded);
-    settings.onLoaded(element);
-
-    element.removeEventListener('load', handleLoadEvent);
-  };
-
   const elementType = element.tagName.toLowerCase();
   const assetLoader = assetLoaders[elementType];
 
-  if (!assetLoader) throw new Error(`Element type '${elementType}' is not supported!`);
+  if (!assetLoader) {
+    throw new Error(`Element type '${elementType}' is not supported!`);
+  }
 
   const assets = {
     src: element.getAttribute(settings.attrs.src),
@@ -90,7 +80,19 @@ const loadAsset = (element, settings) => {
     poster: element.getAttribute(settings.attrs.poster),
   };
 
+  // Callback to handle the load event
+  const handleLoadEvent = () => {
+    element.classList.remove(settings.modifiers.loading);
+    element.removeAttribute(settings.tag);
+    element.classList.add(settings.modifiers.loaded);
+    settings.onLoaded(element);
+    element.removeEventListener('load', handleLoadEvent);
+  };
+
+  // Execute the appropriate asset loader
   assetLoader(element, assets);
+
+  // Set the loading state and add the load event listener
   element.classList.add(settings.modifiers.loading);
   element.addEventListener('load', handleLoadEvent);
 };
