@@ -6,8 +6,10 @@
  * @param {HTMLImageElement} element - The image element to load the asset for.
  * @param {string} src - The asset path attribute value.
  */
-const loadImage = (element, src) => {
-  element.src = src;
+const loadImage = (element, assets) => {
+  element.src = assets.src;
+
+  if (assets.srcset) element.srcset = assets.srcset;
 };
 
 /**
@@ -18,7 +20,7 @@ const loadImage = (element, src) => {
  * @param {HTMLPictureElement} element - The picture element to load the asset for.
  * @param {string} src - The asset URL attribute value.
  */
-const loadPicture = (element, src) => {
+const loadPicture = (element, assets) => {
   let img = element.querySelector('img');
 
   if (!img) {
@@ -26,7 +28,7 @@ const loadPicture = (element, src) => {
     element.append(img);
   }
 
-  loadImage(img, src);
+  loadImage(img, assets);
 };
 
 /**
@@ -37,8 +39,10 @@ const loadPicture = (element, src) => {
  * @param {HTMLVideoElement} element - The video element to load the asset for.
  * @param {string} src - The asset URL attribute value.
  */
-const loadVideo = (element, src) => {
-  element.src = src;
+const loadVideo = (element, assets) => {
+  element.src = assets.src;
+
+  if (assets.poster) element.poster = assets.poster;
 };
 
 /**
@@ -55,9 +59,9 @@ const assetLoaders = {
   img: loadImage,
   picture: loadPicture,
   video: loadVideo,
-	iframe: loadImage,
-	embed: loadImage,
-	object: loadImage,
+  iframe: loadImage,
+  embed: loadImage,
+  object: loadImage,
 };
 
 /**
@@ -75,13 +79,18 @@ const loadAsset = (element, settings) => {
     element.removeEventListener('load', handleLoadEvent);
   };
 
-  const assetPath = element.getAttribute(settings.tag);
   const elementType = element.tagName.toLowerCase();
   const assetLoader = assetLoaders[elementType];
 
-	if (!assetLoader) throw new Error(`Element type '${elementType}' is not supported!`);
+  if (!assetLoader) throw new Error(`Element type '${elementType}' is not supported!`);
 
-  assetLoader(element, assetPath);
+  const assets = {
+    src: element.getAttribute(settings.attrs.src),
+    srcset: element.getAttribute(settings.attrs.srcset),
+    poster: element.getAttribute(settings.attrs.poster),
+  };
+
+  assetLoader(element, assets);
   element.classList.add(settings.modifiers.loading);
   element.addEventListener('load', handleLoadEvent);
 };

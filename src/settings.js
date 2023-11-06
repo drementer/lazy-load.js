@@ -14,7 +14,11 @@
  * @property {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
  */
 const settings = {
-  tag: 'lazy',
+  attrs: {
+    src: 'lazy',
+    srcset: 'lazy-srcset',
+    poster: 'lazy-poster',
+  },
   modifiers: {
     loaded: '-loaded',
     loading: '-loading',
