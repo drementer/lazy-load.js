@@ -18,7 +18,7 @@ import { getElements } from './helpers.js';
  *
  * @param {Object} [customSettings={}] - Additional options for configuring the lazy loading behavior.
  */
-const lazyLoad = (selector = 'lazy', customSettings = {}) => {
+const lazyLoad = (selector, customSettings = {}) => {
   /**
    * Settings object for configuring the lazy loading behavior.
    *
