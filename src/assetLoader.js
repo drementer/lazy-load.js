@@ -55,6 +55,9 @@ const assetLoaders = {
   img: loadImage,
   picture: loadPicture,
   video: loadVideo,
+	iframe: loadImage,
+	embed: loadImage,
+	object: loadImage,
 };
 
 /**
