@@ -80,22 +80,19 @@ const loadAsset = (element, settings) => {
     poster: element.getAttribute(settings.attrs.poster),
   };
 
-  // Callback to handle the load event
   const handleLoadEvent = () => {
     element.classList.remove(settings.modifiers.loading);
+    element.classList.add(settings.modifiers.loaded);
 
     element.removeAttribute(settings.attrs.src);
     element.removeAttribute(settings.attrs.srcset);
     element.removeAttribute(settings.attrs.poster);
 
-    element.classList.add(settings.modifiers.loaded);
     settings.onLoaded(element);
   };
 
-  // Execute the appropriate asset loader
   assetLoader(element, assets);
 
-  // Set the loading state and add the load event listener
   element.classList.add(settings.modifiers.loading);
   element.addEventListener('load', handleLoadEvent, { once: true });
 };
