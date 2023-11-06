@@ -37,7 +37,7 @@ const lazyLoad = (selector, customSettings = {}) => {
 
   try {
     lazyItems.forEach((item) =>
-      observer(item, settings.observer, loadAsset(target, settings))
+      observer(item, loadAsset(target, settings), settings.observer)
     );
   } catch (error) {
     settings.onError(target, error.message);
