@@ -1,6 +1,16 @@
+const regularLoad = (element, assets) => {
+  element.src = assets.src;
+};
+
 const loadImage = (element, assets) => {
   element.src = assets.src;
   if (assets.srcset) element.srcset = assets.srcset;
+};
+
+const loadVideo = (element, assets) => {
+  element.src = assets.src;
+
+  if (assets.poster) element.poster = assets.poster;
 };
 
 const loadPicture = (element, assets) => {
@@ -14,19 +24,13 @@ const loadPicture = (element, assets) => {
   loadImage(img, assets);
 };
 
-const loadVideo = (element, assets) => {
-  element.src = assets.src;
-
-  if (assets.poster) element.poster = assets.poster;
-};
-
 const assetLoaders = {
   img: loadImage,
   picture: loadPicture,
   video: loadVideo,
-  iframe: loadImage,
-  embed: loadImage,
-  object: loadImage,
+  iframe: regularLoad,
+  embed: regularLoad,
+  object: regularLoad,
 };
 
 const loadAsset = (element, settings) => {
