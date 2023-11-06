@@ -13,7 +13,7 @@
  * @property {Function} [onError] - Callback function to execute when an error occurs during loading.
  * @property {Object} [observer={ root: null, threshold: 1, rootMargin: '300px 0px' }] - Configuration for IntersectionObserver used for lazy loading.
  */
-const settings = {
+const defaultSettings = {
   attrs: {
     src: 'lazy',
     srcset: 'lazy-srcset',
@@ -34,4 +34,4 @@ const settings = {
   },
 };
 
-export default settings;
+export default defaultSettings;

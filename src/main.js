@@ -8,7 +8,7 @@
  * @see {@link https://github.com/drementer/lazy-load.js}
  */
 
-import defaultSettings from './settings.js';
+import defaultSettings from './defaultSettings.js';
 import loadAsset from './assetLoader.js';
 import observer from './observer.js';
 import { getElements } from './helpers.js';
