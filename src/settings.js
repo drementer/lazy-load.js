@@ -23,7 +23,7 @@ const settings = {
     loaded: '-loaded',
     loading: '-loading',
   },
-  onLoaded: (element) => {},
+  onLoaded: () => {},
   onError: (element, error) => {
     console.warn('Error on ~ element, error:', element, error);
   },
