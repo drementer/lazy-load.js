@@ -10,9 +10,7 @@ const defaultSettings = {
   },
   onLoaded: () => {},
   onLoading: () => {},
-  onError: (element, error) => {
-    console.warn('Error on ~ element, error:', element, error);
-  },
+  onError: (element, error) => console.warn('Error on:', element, error),
   observer: {
     root: null,
     threshold: 1,
