@@ -1,5 +1,7 @@
 import lazyLoad from '/dist/lazy-load.js';
 
-lazyLoad('lazy', {
+const lazyLoadItems = document.querySelectorAll('[lazy]');
+
+lazyLoad(lazyLoadItems, {
   onLoaded: (element) => console.log(element),
 });
