@@ -1,10 +1,3 @@
-/**
- * Creates an IntersectionObserver for a given item and triggers a callback when the item is intersecting.
- *
- * @param {HTMLElement} item - The HTML element to observe.
- * @param {Function} callback - The callback function to execute when the item is intersecting.
- * @param {Object} settings - The settings for the IntersectionObserver.
- */
 const observer = (item, callback, settings) => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {

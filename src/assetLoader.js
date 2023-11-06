@@ -1,24 +1,8 @@
-/**
- * Loads the asset for the given image element.
- *
- * @private
- *
- * @param {HTMLImageElement} element - The image element to load the asset for.
- * @param {Object} assets - The asset data.
- */
 const loadImage = (element, assets) => {
   element.src = assets.src;
   if (assets.srcset) element.srcset = assets.srcset;
 };
 
-/**
- * Loads the asset for the given picture element.
- *
- * @private
- *
- * @param {HTMLPictureElement} element - The picture element to load the asset for.
- * @param {Object} assets - The asset data.
- */
 const loadPicture = (element, assets) => {
   let img = element.querySelector('img');
 
@@ -30,27 +14,12 @@ const loadPicture = (element, assets) => {
   loadImage(img, assets);
 };
 
-/**
- * Loads the asset for the given video element.
- *
- * @private
- *
- * @param {HTMLVideoElement} element - The video element to load the asset for.
- * @param {Object} assets - The asset data.
- */
 const loadVideo = (element, assets) => {
   element.src = assets.src;
 
   if (assets.poster) element.poster = assets.poster;
 };
 
-/**
- * A map of asset loaders by element type.
- *
- * @private
- *
- * @type {Object}
- */
 const assetLoaders = {
   img: loadImage,
   picture: loadPicture,
@@ -60,12 +29,6 @@ const assetLoaders = {
   object: loadImage,
 };
 
-/**
- * Loads the asset for the given element based on its type (img, picture, video).
- *
- * @param {HTMLElement} element - The element to load the asset for.
- * @param {Object} settings - The configuration settings.
- */
 const loadAsset = (element, settings) => {
   const elementType = element.tagName.toLowerCase();
   const assetLoader = assetLoaders[elementType];

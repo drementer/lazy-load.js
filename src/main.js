@@ -13,31 +13,10 @@ import loadAsset from './assetLoader.js';
 import observer from './observer.js';
 import { getElements } from './helpers.js';
 
-/**
- * Lazy load assets.
- *
- * @param {Object} [customSettings={}] - Additional options for configuring the lazy loading behavior.
- */
 const lazyLoad = (selector, customSettings = {}) => {
-  /**
-   * Settings object for configuring the lazy loading behavior.
-   *
-   * @type {Object}
-   */
   const settings = { ...defaultSettings, ...customSettings };
-
-  /**
-   * NodeList of lazy loadable elements.
-   *
-   * @type {NodeList | Array}
-   */
   const lazyItems = getElements(selector);
 
-  /**
-   * Callback function for the observer. Tries to load the asset and handles any errors.
-   *
-   * @param {HTMLElement} target - The HTML element to load the asset for.
-   */
   const observerCallback = (target) => {
     try {
       loadAsset(target, settings);
