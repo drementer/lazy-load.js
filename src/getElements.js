@@ -6,4 +6,4 @@ const getElements = (selector, root = document) => {
   return root.querySelectorAll(selector);
 };
 
-export { getElements };
+export default getElements;

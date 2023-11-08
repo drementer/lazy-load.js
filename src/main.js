@@ -11,7 +11,7 @@
 import defaultSettings from './defaultSettings.js';
 import loadAsset from './assetLoader.js';
 import observer from './observer.js';
-import { getElements } from './getElements.js';
+import getElements from './getElements.js';
 
 const lazyLoad = (selector, customSettings = {}) => {
   const settings = { ...defaultSettings, ...customSettings };
