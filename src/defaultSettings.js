@@ -1,4 +1,4 @@
-const defaultSettings = {
+export default {
   attrs: {
     src: 'lazy',
     srcset: 'lazy-srcset',
@@ -17,5 +17,3 @@ const defaultSettings = {
     rootMargin: '100% 0px',
   },
 };
-
-export default defaultSettings;

@@ -13,7 +13,7 @@ import loadAsset from './assetLoader.js';
 import observer from './observer.js';
 import getElements from './getElements.js';
 
-const lazyLoad = (selector, customSettings = {}) => {
+export default (selector, customSettings = {}) => {
   const settings = { ...defaultSettings, ...customSettings };
   const lazyItems = getElements(selector);
 
@@ -32,5 +32,3 @@ const lazyLoad = (selector, customSettings = {}) => {
     observer(item, observerCallback, settings.observer)
   );
 };
-
-export default lazyLoad;

@@ -9,7 +9,6 @@ const loadImage = (element, assets) => {
 
 const loadVideo = (element, assets) => {
   element.src = assets.src;
-
   if (assets.poster) element.poster = assets.poster;
 };
 
@@ -33,13 +32,9 @@ const assetLoaders = {
   object: regularLoad,
 };
 
-const loadAsset = (element, settings) => {
+export default (element, settings) => {
   const elementType = element.tagName.toLowerCase();
   const assetLoader = assetLoaders[elementType];
-
-  if (!assetLoader) {
-    throw new Error(`Element type '${elementType}' is not supported!`);
-  }
 
   const assets = {
     src: element.getAttribute(settings.attrs.src),
@@ -63,5 +58,3 @@ const loadAsset = (element, settings) => {
   element.classList.add(settings.modifiers.loading);
   element.addEventListener('load', handleLoadEvent, { once: true });
 };
-
-export default loadAsset;

@@ -1,4 +1,4 @@
-const observer = (item, callback, settings) => {
+export default (item, callback, settings) => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -10,5 +10,3 @@ const observer = (item, callback, settings) => {
 
   observer.observe(item);
 };
-
-export default observer;
