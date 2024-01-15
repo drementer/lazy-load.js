@@ -1,59 +1,48 @@
-const regularLoad = (element, assets) => {
-  element.src = assets.src;
+const supportedElements = [
+  'img',
+  'picture',
+  'video',
+  'embed',
+  'object',
+];
+
+const getAssets = (element, settings) => {
+  const assets = {};
+
+  Object.entries(settings.attrs).forEach(([key, value]) => {
+    assets[key] = element.getAttribute(value);
+  });
+
+  return assets;
 };
 
-const loadImage = (element, assets) => {
-  element.src = assets.src;
-  if (assets.srcset) element.srcset = assets.srcset;
+const loadAssets = (element, assets) => {
+  Object.entries(assets).forEach(([key, value]) => {
+    if (value) element.setAttribute(key, value);
+  });
 };
 
-const loadVideo = (element, assets) => {
-  element.src = assets.src;
-  if (assets.poster) element.poster = assets.poster;
-};
+const elementLoaded = (element, settings) => {
+  element.classList.add(settings.modifiers.loaded);
+  element.classList.remove(settings.modifiers.loading);
 
-const loadPicture = (element, assets) => {
-  let img = element.querySelector('img');
+  Object.entries(settings.attrs).forEach(([key, value]) => {
+    element.removeAttribute(value);
+  });
 
-  if (!img) {
-    img = document.createElement('img');
-    element.appendChild(img);
-  }
-
-  loadImage(img, assets);
-};
-
-const assetLoaders = {
-  img: loadImage,
-  picture: loadPicture,
-  video: loadVideo,
-  iframe: regularLoad,
-  embed: regularLoad,
-  object: regularLoad,
+  settings.onLoaded(element);
 };
 
 export default (element, settings) => {
   const elementType = element.tagName.toLowerCase();
-  const assetLoader = assetLoaders[elementType];
+  const isSupported = supportedElements.includes(elementType);
 
-  const assets = {
-    src: element.getAttribute(settings.attrs.src),
-    srcset: element.getAttribute(settings.attrs.srcset),
-    poster: element.getAttribute(settings.attrs.poster),
-  };
+  if (!isSupported) return console.log('Element not supported!', element);
 
-  const handleLoadEvent = () => {
-    element.classList.add(settings.modifiers.loaded);
-    element.classList.remove(settings.modifiers.loading);
+  const assets = getAssets(element, settings);
+  const handleLoadEvent = () => elementLoaded(element, settings);
 
-    element.removeAttribute(settings.attrs.src);
-    element.removeAttribute(settings.attrs.srcset);
-    element.removeAttribute(settings.attrs.poster);
-
-    settings.onLoaded(element);
-  };
-
-  assetLoader(element, assets);
+  loadAssets(element, assets);
 
   element.classList.add(settings.modifiers.loading);
   element.addEventListener('load', handleLoadEvent, { once: true });
