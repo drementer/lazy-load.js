@@ -43,8 +43,8 @@ export default (element, settings) => {
   };
 
   const handleLoadEvent = () => {
-    element.classList.remove(settings.modifiers.loading);
     element.classList.add(settings.modifiers.loaded);
+    element.classList.remove(settings.modifiers.loading);
 
     element.removeAttribute(settings.attrs.src);
     element.removeAttribute(settings.attrs.srcset);
