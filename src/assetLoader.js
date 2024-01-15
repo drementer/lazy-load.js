@@ -1,34 +1,18 @@
-const supportedElements = [
-  'img',
-  'picture',
-  'video',
-  'embed',
-  'object',
-];
-
-const getAssets = (element, settings) => {
-  const assets = {};
-
-  Object.entries(settings.attrs).forEach(([key, value]) => {
-    assets[key] = element.getAttribute(value);
-  });
-
-  return assets;
-};
+const supportedElements = ['img', 'picture', 'video', 'embed', 'object'];
 
 const loadAssets = (element, assets) => {
-  Object.entries(assets).forEach(([key, value]) => {
-    if (value) element.setAttribute(key, value);
-  });
+  if (assets.src) element.setAttribute('src', assets.src);
+  if (assets.srcset) element.setAttribute('srcset', assets.srcset);
+  if (assets.poster) element.setAttribute('poster', assets.poster);
 };
 
 const elementLoaded = (element, settings) => {
   element.classList.add(settings.modifiers.loaded);
   element.classList.remove(settings.modifiers.loading);
 
-  Object.entries(settings.attrs).forEach(([key, value]) => {
-    element.removeAttribute(value);
-  });
+  element.removeAttribute(settings.attrs.src);
+  element.removeAttribute(settings.attrs.srcset);
+  element.removeAttribute(settings.attrs.poster);
 
   settings.onLoaded(element);
 };
@@ -37,9 +21,13 @@ export default (element, settings) => {
   const elementType = element.tagName.toLowerCase();
   const isSupported = supportedElements.includes(elementType);
 
-  if (!isSupported) return console.log('Element not supported!', element);
+  if (!isSupported) return console.warn('Element not supported!', element);
 
-  const assets = getAssets(element, settings);
+  const assets = {
+    src: element.getAttribute(settings.attrs.src),
+    srcset: element.getAttribute(settings.attrs.srcset),
+    poster: element.getAttribute(settings.attrs.poster),
+  };
   const handleLoadEvent = () => elementLoaded(element, settings);
 
   loadAssets(element, assets);
