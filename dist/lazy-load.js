@@ -6,7 +6,7 @@
  * @version 1.0.7
  * @license MIT
  * @see {@link https://github.com/drementer/lazy-load.js}
- */ var $9be491445886d637$export$2e2bcd8739ae039 = {
+ */ var $eca09eba1a2796e9$export$2e2bcd8739ae039 = {
     attrs: {
         src: "lazy",
         srcset: "lazy-srcset",
@@ -27,50 +27,37 @@
 };
 
 
-const $f85e789b098d4f3c$var$regularLoad = (element, assets)=>{
-    element.src = assets.src;
+const $fa423858cf60d4ae$var$supportedElements = [
+    "img",
+    "picture",
+    "video",
+    "embed",
+    "object"
+];
+const $fa423858cf60d4ae$var$loadAssets = (element, assets)=>{
+    if (assets.src) element.setAttribute("src", assets.src);
+    if (assets.srcset) element.setAttribute("srcset", assets.srcset);
+    if (assets.poster) element.setAttribute("poster", assets.poster);
 };
-const $f85e789b098d4f3c$var$loadImage = (element, assets)=>{
-    element.src = assets.src;
-    if (assets.srcset) element.srcset = assets.srcset;
+const $fa423858cf60d4ae$var$elementLoaded = (element, settings)=>{
+    element.classList.add(settings.modifiers.loaded);
+    element.classList.remove(settings.modifiers.loading);
+    element.removeAttribute(settings.attrs.src);
+    element.removeAttribute(settings.attrs.srcset);
+    element.removeAttribute(settings.attrs.poster);
+    settings.onLoaded(element);
 };
-const $f85e789b098d4f3c$var$loadVideo = (element, assets)=>{
-    element.src = assets.src;
-    if (assets.poster) element.poster = assets.poster;
-};
-const $f85e789b098d4f3c$var$loadPicture = (element, assets)=>{
-    let img = element.querySelector("img");
-    if (!img) {
-        img = document.createElement("img");
-        element.appendChild(img);
-    }
-    $f85e789b098d4f3c$var$loadImage(img, assets);
-};
-const $f85e789b098d4f3c$var$assetLoaders = {
-    img: $f85e789b098d4f3c$var$loadImage,
-    picture: $f85e789b098d4f3c$var$loadPicture,
-    video: $f85e789b098d4f3c$var$loadVideo,
-    iframe: $f85e789b098d4f3c$var$regularLoad,
-    embed: $f85e789b098d4f3c$var$regularLoad,
-    object: $f85e789b098d4f3c$var$regularLoad
-};
-var $f85e789b098d4f3c$export$2e2bcd8739ae039 = (element, settings)=>{
+var $fa423858cf60d4ae$export$2e2bcd8739ae039 = (element, settings)=>{
     const elementType = element.tagName.toLowerCase();
-    const assetLoader = $f85e789b098d4f3c$var$assetLoaders[elementType];
+    const isSupported = $fa423858cf60d4ae$var$supportedElements.includes(elementType);
+    if (!isSupported) return console.warn("Element not supported!", element);
     const assets = {
         src: element.getAttribute(settings.attrs.src),
         srcset: element.getAttribute(settings.attrs.srcset),
         poster: element.getAttribute(settings.attrs.poster)
     };
-    const handleLoadEvent = ()=>{
-        element.classList.remove(settings.modifiers.loading);
-        element.classList.add(settings.modifiers.loaded);
-        element.removeAttribute(settings.attrs.src);
-        element.removeAttribute(settings.attrs.srcset);
-        element.removeAttribute(settings.attrs.poster);
-        settings.onLoaded(element);
-    };
-    assetLoader(element, assets);
+    const handleLoadEvent = ()=>$fa423858cf60d4ae$var$elementLoaded(element, settings);
+    $fa423858cf60d4ae$var$loadAssets(element, assets);
     element.classList.add(settings.modifiers.loading);
     element.addEventListener("load", handleLoadEvent, {
         once: true
@@ -78,19 +65,20 @@ var $f85e789b098d4f3c$export$2e2bcd8739ae039 = (element, settings)=>{
 };
 
 
-var $726175a518dac223$export$2e2bcd8739ae039 = (item, callback, settings)=>{
-    const observer = new IntersectionObserver((entries)=>{
+function $5aa3f28da5200ea6$export$2e2bcd8739ae039(item, callback, settings) {
+    const handleIntersection = (entries, observer)=>{
         entries.forEach((entry)=>{
             if (!entry.isIntersecting) return;
             callback(entry.target);
             observer.unobserve(entry.target);
         });
-    }, settings);
+    };
+    const observer = new IntersectionObserver(handleIntersection, settings);
     observer.observe(item);
-};
+}
 
 
-var $c64ba146cb242d62$export$2e2bcd8739ae039 = (selector, root = document)=>{
+var $e5a64a9b43e3c02c$export$2e2bcd8739ae039 = (selector, root = document)=>{
     if (selector instanceof Element) return [
         selector
     ];
@@ -100,24 +88,25 @@ var $c64ba146cb242d62$export$2e2bcd8739ae039 = (selector, root = document)=>{
 };
 
 
-var $a118670bf7476f3e$export$2e2bcd8739ae039 = (selector, customSettings = {})=>{
+var $3e2aed16982f049f$export$2e2bcd8739ae039 = (selector, customSettings = {})=>{
     const settings = {
-        ...(0, $9be491445886d637$export$2e2bcd8739ae039),
+        ...(0, $eca09eba1a2796e9$export$2e2bcd8739ae039),
         ...customSettings
     };
-    const lazyItems = (0, $c64ba146cb242d62$export$2e2bcd8739ae039)(selector);
+    const lazyItems = (0, $e5a64a9b43e3c02c$export$2e2bcd8739ae039)(selector);
     if (!lazyItems.length) return console.warn("No lazy loadable element found!");
     const observerCallback = (target)=>{
         try {
             settings.onLoading(target);
-            (0, $f85e789b098d4f3c$export$2e2bcd8739ae039)(target, settings);
+            (0, $fa423858cf60d4ae$export$2e2bcd8739ae039)(target, settings);
         } catch (error) {
             settings.onError(target, error.message);
         }
     };
-    lazyItems.forEach((item)=>(0, $726175a518dac223$export$2e2bcd8739ae039)(item, observerCallback, settings.observer));
+    lazyItems.forEach((item)=>{
+        (0, $5aa3f28da5200ea6$export$2e2bcd8739ae039)(item, observerCallback, settings.observer);
+    });
 };
 
 
-export {$a118670bf7476f3e$export$2e2bcd8739ae039 as default};
-//# sourceMappingURL=lazy-load.js.map
+export {$3e2aed16982f049f$export$2e2bcd8739ae039 as default};
