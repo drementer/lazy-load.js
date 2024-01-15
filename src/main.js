@@ -28,7 +28,7 @@ export default (selector, customSettings = {}) => {
     }
   };
 
-  lazyItems.forEach((item) =>
-    observer(item, observerCallback, settings.observer)
-  );
+  const observeItems = observer(item, observerCallback, settings.observer);
+
+  lazyItems.forEach(observeItems);
 };
