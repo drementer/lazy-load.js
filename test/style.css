@@ -11,6 +11,7 @@ img {
   border-radius: 10px;
 }
 img::after {
+	z-index: -1;
   content: '';
 
   position: absolute;
