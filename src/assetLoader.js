@@ -21,14 +21,14 @@ export default (element, settings) => {
   const elementType = element.tagName.toLowerCase();
   const isSupported = supportedElements.includes(elementType);
 
-  if (!isSupported) return console.warn('Element not supported!', element);
+  if (!isSupported) throw new Error(`Element type ${elementType} is not supported!`);
 
+  const handleLoadEvent = () => elementLoaded(element, settings);
   const assets = {
     src: element.getAttribute(settings.attrs.src),
     srcset: element.getAttribute(settings.attrs.srcset),
     poster: element.getAttribute(settings.attrs.poster),
   };
-  const handleLoadEvent = () => elementLoaded(element, settings);
 
   loadAssets(element, assets);
 
