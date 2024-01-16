@@ -10,7 +10,7 @@ export default {
   },
   onLoaded: () => {},
   onLoading: () => {},
-  onError: (element, error) => console.warn('Error on:', element, error),
+  onError: (element, error) => console.error('Error on:', element, error),
   observer: {
     root: null,
     threshold: 1,
