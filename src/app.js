@@ -9,7 +9,9 @@
  */
 
 import defaultOptions from './defaultOptions.js';
+import states from './states.js';
 import loadAsset from './assetLoader.js';
+import isSupported from './isSupported.js';
 import observer from './observer.js';
 import getElements from './getElements.js';
 
@@ -20,15 +22,16 @@ export default (selector, customOptions = {}) => {
   if (!lazyItems.length) return console.error('No lazy loadable element found!');
 
   const observerCallback = (target) => {
-    try {
-      options.onLoading(target);
-      loadAsset(target, options);
-    } catch (error) {
-      options.onError(target, error.message);
-    }
+    states.loading(target, options);
+    loadAsset(target, options);
   };
 
   lazyItems.forEach((item) => {
-    observer(item, observerCallback, options.observer);
+    try {
+      isSupported(item);
+      observer(item, observerCallback, options.observer);
+    } catch (error) {
+      states.error(item, options, error.message);
+    }
   });
 };
