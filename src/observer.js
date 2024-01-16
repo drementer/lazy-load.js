@@ -1,4 +1,4 @@
-export default function observeIntersection(item, callback, settings) {
+export default (item, callback, settings) => {
   const handleIntersection = (entries, observer) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -11,4 +11,4 @@ export default function observeIntersection(item, callback, settings) {
   const observer = new IntersectionObserver(handleIntersection, settings);
 
   observer.observe(item);
-}
+};
