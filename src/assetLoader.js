@@ -6,32 +6,32 @@ const loadAssets = (element, assets) => {
   if (assets.poster) element.setAttribute('poster', assets.poster);
 };
 
-const elementLoaded = (element, settings) => {
-  element.classList.add(settings.modifiers.loaded);
-  element.classList.remove(settings.modifiers.loading);
+const elementLoaded = (element, options) => {
+  element.classList.add(options.modifiers.loaded);
+  element.classList.remove(options.modifiers.loading);
 
-  element.removeAttribute(settings.attrs.src);
-  element.removeAttribute(settings.attrs.srcset);
-  element.removeAttribute(settings.attrs.poster);
+  element.removeAttribute(options.attrs.src);
+  element.removeAttribute(options.attrs.srcset);
+  element.removeAttribute(options.attrs.poster);
 
-  settings.onLoaded(element);
+  options.onLoaded(element);
 };
 
-export default (element, settings) => {
+export default (element, options) => {
   const elementType = element.tagName.toLowerCase();
   const isSupported = supportedElements.includes(elementType);
 
   if (!isSupported) throw new Error(`Element type ${elementType} is not supported!`);
 
-  const handleLoadEvent = () => elementLoaded(element, settings);
+  const handleLoadEvent = () => elementLoaded(element, options);
   const assets = {
-    src: element.getAttribute(settings.attrs.src),
-    srcset: element.getAttribute(settings.attrs.srcset),
-    poster: element.getAttribute(settings.attrs.poster),
+    src: element.getAttribute(options.attrs.src),
+    srcset: element.getAttribute(options.attrs.srcset),
+    poster: element.getAttribute(options.attrs.poster),
   };
 
   loadAssets(element, assets);
 
-  element.classList.add(settings.modifiers.loading);
+  element.classList.add(options.modifiers.loading);
   element.addEventListener('load', handleLoadEvent, { once: true });
 };

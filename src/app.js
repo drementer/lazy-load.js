@@ -8,27 +8,27 @@
  * @see {@link https://github.com/drementer/lazy-load.js}
  */
 
-import defaultSettings from './defaultSettings.js';
+import defaultOptions from './defaultOptions.js';
 import loadAsset from './assetLoader.js';
 import observer from './observer.js';
 import getElements from './getElements.js';
 
-export default (selector, customSettings = {}) => {
-  const settings = { ...defaultSettings, ...customSettings };
+export default (selector, customOptions = {}) => {
+  const options = { ...defaultOptions, ...customOptions };
   const lazyItems = getElements(selector);
 
-  if (!lazyItems.length) return console.warn('No lazy loadable element found!');
+  if (!lazyItems.length) return console.error('No lazy loadable element found!');
 
   const observerCallback = (target) => {
     try {
-      settings.onLoading(target);
-      loadAsset(target, settings);
+      options.onLoading(target);
+      loadAsset(target, options);
     } catch (error) {
-      settings.onError(target, error.message);
+      options.onError(target, error.message);
     }
   };
 
   lazyItems.forEach((item) => {
-    observer(item, observerCallback, settings.observer);
+    observer(item, observerCallback, options.observer);
   });
 };
