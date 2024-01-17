@@ -5,15 +5,16 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<title>Lazy-load.js</title>
+
 		<link rel="stylesheet" href="style.css">
+		<script defer type="module" src="/test/index.js"></script>
 	</head>
 	<body>
 
 		<picture lazy="http://unsplash.it/400/400?random=9&gravity=center" alt="Random Image"></picture>
 
-		<div lazy="http://unsplash.it/5000/4000?random=0&gravity=center"></div>
+		<div lazy="http://unsplash.it/400/400?random=0&gravity=center"></div>
 
-		<img lazy="http://unsplash.it/5000/4000?random=0&gravity=center" alt="Random Image"/>
 		<img lazy="http://unsplash.it/400/400?random=1&gravity=center" alt="Random Image"/>
 		<img lazy="http://unsplash.it/400/400?random=2&gravity=center" alt="Random Image"/>
 		<img lazy="http://unsplash.it/400/400?random=3&gravity=center" alt="Random Image"/>
@@ -22,8 +23,6 @@
 		<img lazy="http://unsplash.it/400/400?random=6&gravity=center" alt="Random Image"/>
 		<img lazy="http://unsplash.it/400/400?random=7&gravity=center" alt="Random Image"/>
 		<img lazy="http://unsplash.it/400/400?random=8&gravity=center" alt="Random Image"/>
-
-		<script type="module" src="/test/index.js"></script>
 
 	</body>
 </html>
