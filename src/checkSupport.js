@@ -1,8 +1,4 @@
-/**
- * @type {Array}
- * List of supported HTML element types.
- */
-const supportedElements = ['img', 'picture', 'video', 'embed', 'object'];
+import settings from './settings.js';
 
 /**
  * Checks if the given HTML element is of a supported type.
@@ -13,7 +9,7 @@ const supportedElements = ['img', 'picture', 'video', 'embed', 'object'];
  */
 export default (element) => {
   const elementType = element.tagName.toLowerCase();
-  const isSupported = supportedElements.includes(elementType);
+  const isSupported = settings.supportedElements.includes(elementType);
 
   if (isSupported) return true;
 

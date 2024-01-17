@@ -1,3 +1,5 @@
+import settings from './settings.js';
+
 /**
  * Object managing different states.
  *
@@ -6,24 +8,38 @@
  * @property {function} error - Function handling error state operations.
  */
 const states = {
+  waiting: (element, options) => {
+    element.setAttribute(settings.stateAttr, settings.states.waiting);
+  },
+
   loading: (element, options) => {
-    const handleLoad = () => states.loaded(element, options);
-    element.classList.add(options.modifiers.loading);
+    const handleLoad = () => {
+      states.loaded(element, options);
+    };
+    const handleError = () => {
+      states.error(element, options, 'loading media.');
+    };
+
     element.addEventListener('load', handleLoad, { once: true });
+    element.addEventListener('error', handleError, { once: true });
+
+    element.setAttribute(settings.stateAttr, settings.states.loading);
     options.onLoading(element);
   },
 
   loaded: (element, options) => {
-    element.classList.remove(options.modifiers.loading);
-    element.classList.add(options.modifiers.loaded);
+    element.setAttribute(settings.stateAttr, settings.states.loaded);
+
     element.removeAttribute(options.attrs.src);
     element.removeAttribute(options.attrs.srcset);
     element.removeAttribute(options.attrs.poster);
+
     options.onLoaded(element);
   },
 
   error: (element, options, error) => {
-    element.classList.remove(options.modifiers.loading);
+    element.setAttribute(settings.stateAttr, settings.states.error);
+
     options.onError(element, error);
   },
 };

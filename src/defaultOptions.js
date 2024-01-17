@@ -6,10 +6,6 @@
  * @property {string} attrs.srcset - The attribute for the source set of the media.
  * @property {string} attrs.poster - The attribute for the poster of the media.
  *
- * @property {Object} modifiers - The modifiers to be used for the states of loading.
- * @property {string} modifiers.loaded - The modifier for the loaded state.
- * @property {string} modifiers.loading - The modifier for the loading state.
- *
  * @property {Object} observer - The options for the Intersection Observer.
  * @property {Element} observer.root - The root element for the Intersection Observer.
  * @property {number} observer.threshold - The threshold for the Intersection Observer.
@@ -24,10 +20,6 @@ export default {
     src: 'lazy',
     srcset: 'lazy-srcset',
     poster: 'lazy-poster',
-  },
-  modifiers: {
-    loaded: '-loaded',
-    loading: '-loading',
   },
   observer: {
     root: null,
