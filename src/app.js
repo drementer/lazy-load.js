@@ -25,6 +25,8 @@ export default (selector, customOptions = {}) => {
 
   const processLazyItem = (item) => {
     try {
+      states.waiting(item, options);
+
       checkSupport(item);
       observer(item, observerCallback, options.observer);
     } catch (error) {
