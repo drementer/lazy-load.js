@@ -17,19 +17,27 @@ import getElements from './getElements.js';
 
 export default (selector, customOptions = {}) => {
   const options = { ...defaultOptions, ...customOptions };
-  const lazyItems = getElements(selector);
 
   const observerCallback = (target) => {
     states.loading(target, options);
     loadAsset(target, options);
   };
 
-  lazyItems.forEach((item) => {
+  const processLazyItem = (item) => {
     try {
       checkSupport(item);
       observer(item, observerCallback, options.observer);
     } catch (error) {
       states.error(item, options, error.message);
     }
-  });
+  };
+
+  try {
+    const lazyItems = getElements(selector);
+    if (!lazyItems.length) throw new Error('No lazy loadable element found!');
+
+    lazyItems.forEach(processLazyItem);
+  } catch (error) {
+    console.error('Lazy error:', error.message);
+  }
 };
