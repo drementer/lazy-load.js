@@ -3,6 +3,8 @@ import settings from './settings.js';
 /**
  * Object managing different states.
  *
+ * @module states
+ *
  * @property {function} loading - Function handling loading state operations.
  * @property {function} loaded - Function handling loaded state operations.
  * @property {function} error - Function handling error state operations.

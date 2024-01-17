@@ -3,6 +3,8 @@ import settings from './settings.js';
 /**
  * Checks if the given HTML element is of a supported type.
  *
+ * @module checkSupport
+ *
  * @param {HTMLElement} element - The HTML element to be checked.
  * @throws {Error} Throws an error if the element type is not supported.
  * @returns {boolean} Returns true if the element type is supported.

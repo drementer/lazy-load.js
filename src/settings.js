@@ -1,4 +1,8 @@
 /**
+ * Default settings for the lazy loading functionality.
+ *
+ * @module settings
+ *
  * @property {string} stateAttr - The attribute to store the state of the lazy loading process.
  * @property {Object} states - The possible states of the lazy loading process.
  * @property {string} states.waiting - The state when the element is waiting to be loaded.

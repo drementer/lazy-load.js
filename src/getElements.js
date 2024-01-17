@@ -1,6 +1,8 @@
 /**
  * Select elements based on a given selector within a specified root element.
  *
+ * @module getElements
+ *
  * @param {string | Element | NodeList | Array} selector - The selector to match elements.
  * @returns {NodeList} - The NodeList containing the selected elements.
  */

@@ -1,6 +1,8 @@
 /**
  * Creates an Intersection Observer and starts observing the given item.
  *
+ * @module observer
+ *
  * @param {Element} item - The DOM element to be observed.
  * @param {Function} callback - The function to be called when the item is intersecting.
  * @param {Object} settings - The options for the Intersection Observer.

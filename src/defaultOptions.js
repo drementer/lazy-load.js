@@ -1,6 +1,8 @@
 /**
  * Default options for the lazy loading functionality.
  *
+ * @module defaultOptions
+ *
  * @property {Object} attrs - The attributes to be used for lazy loading.
  * @property {string} attrs.src - The attribute for the source of the media.
  * @property {string} attrs.srcset - The attribute for the source set of the media.
