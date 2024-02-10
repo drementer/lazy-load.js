@@ -10,7 +10,7 @@ import settings from './settings.js';
  * @property {function} error - Function handling error state operations.
  */
 const states = {
-  waiting: (element, options) => {
+  waiting: (element) => {
     element.setAttribute(settings.stateAttr, settings.states.waiting);
   },
 
