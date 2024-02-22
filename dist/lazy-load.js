@@ -80,7 +80,7 @@
  * @property {function} loaded - Function handling loaded state operations.
  * @property {function} error - Function handling error state operations.
  */ const $94035bc41cd26735$var$states = {
-    waiting: (element, options)=>{
+    waiting: (element)=>{
         element.setAttribute((0, $51e72698ed0f3e92$export$2e2bcd8739ae039).stateAttr, (0, $51e72698ed0f3e92$export$2e2bcd8739ae039).states.waiting);
     },
     loading: (element, options)=>{
