@@ -8,12 +8,12 @@
  * @see {@link https://github.com/drementer/lazy-load.js}
  */
 
-import defaultOptions from './defaultOptions.js';
-import states from './states.js';
-import loadAsset from './assetLoader.js';
-import checkSupport from './checkSupport.js';
-import observer from './observer.js';
-import getElements from './getElements.js';
+import defaultOptions from './utils/defaultOptions.js';
+import loadAsset from './helpers/assetLoader.js';
+import states from './helpers/states.js';
+import checkSupport from './helpers/checkSupport.js';
+import observer from './helpers/observer.js';
+import getElements from './helpers/getElements.js';
 
 export default (selector, customOptions = {}) => {
   const options = { ...defaultOptions, ...customOptions };

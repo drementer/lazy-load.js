@@ -1,4 +1,4 @@
-import settings from './settings.js';
+import settings from '../utils/settings.js';
 
 /**
  * Checks if the given HTML element is of a supported type.

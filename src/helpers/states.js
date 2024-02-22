@@ -1,4 +1,4 @@
-import settings from './settings.js';
+import settings from '../utils/settings.js';
 
 /**
  * Object managing different states.

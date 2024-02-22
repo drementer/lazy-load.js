@@ -24,7 +24,7 @@
  * @property {Function} onLoaded - The callback to be executed when the media is loaded.
  * @property {Function} onLoading - The callback to be executed when the media is loading.
  * @property {Function} onError - The callback to be executed when there is an error loading the media.
- */ var $caecf5182af9e868$export$2e2bcd8739ae039 = {
+ */ var $e4e7a73bee6a4aee$export$2e2bcd8739ae039 = {
     attrs: {
         src: "lazy",
         srcset: "lazy-srcset",
@@ -42,6 +42,29 @@
 
 
 /**
+ * Set attributes on the given HTML element based on the provided options.
+ *
+ * @module assetLoader
+ *
+ * @param {HTMLElement} element - The HTML element to set attributes on.
+ * @param {Object} options - Options for attribute names.
+ * @param {Object} options.attrs - Attribute names.
+ * @param {string} [options.attrs.src] - Attribute name for 'src'.
+ * @param {string} [options.attrs.srcset] - Attribute name for 'srcset'.
+ * @param {string} [options.attrs.poster] - Attribute name for 'poster'.
+ */ var $55aebfb21ba6071b$export$2e2bcd8739ae039 = (element, options)=>{
+    const assets = {
+        src: element.getAttribute(options.attrs.src),
+        srcset: element.getAttribute(options.attrs.srcset),
+        poster: element.getAttribute(options.attrs.poster)
+    };
+    if (assets.src) element.setAttribute("src", assets.src);
+    if (assets.srcset) element.setAttribute("srcset", assets.srcset);
+    if (assets.poster) element.setAttribute("poster", assets.poster);
+};
+
+
+/**
  * Default settings for the lazy loading functionality.
  *
  * @module settings
@@ -53,7 +76,7 @@
  * @property {string} states.loaded - The state when the element has finished loading.
  * @property {string} states.error - The state when there was an error loading the element.
  * @property {Array.<string>} supportedElements - The types of elements that are supported for lazy loading.
- */ var $51e72698ed0f3e92$export$2e2bcd8739ae039 = {
+ */ var $2e06dbd9a7176757$export$2e2bcd8739ae039 = {
     stateAttr: "lazy-state",
     states: {
         waiting: "waiting",
@@ -79,16 +102,16 @@
  * @property {function} loading - Function handling loading state operations.
  * @property {function} loaded - Function handling loaded state operations.
  * @property {function} error - Function handling error state operations.
- */ const $94035bc41cd26735$var$states = {
+ */ const $be4bb12be4dd9f4e$var$states = {
     waiting: (element)=>{
-        element.setAttribute((0, $51e72698ed0f3e92$export$2e2bcd8739ae039).stateAttr, (0, $51e72698ed0f3e92$export$2e2bcd8739ae039).states.waiting);
+        element.setAttribute((0, $2e06dbd9a7176757$export$2e2bcd8739ae039).stateAttr, (0, $2e06dbd9a7176757$export$2e2bcd8739ae039).states.waiting);
     },
     loading: (element, options)=>{
         const handleLoad = ()=>{
-            $94035bc41cd26735$var$states.loaded(element, options);
+            $be4bb12be4dd9f4e$var$states.loaded(element, options);
         };
         const handleError = ()=>{
-            $94035bc41cd26735$var$states.error(element, options, "loading media.");
+            $be4bb12be4dd9f4e$var$states.error(element, options, "loading media.");
         };
         element.addEventListener("load", handleLoad, {
             once: true
@@ -96,45 +119,22 @@
         element.addEventListener("error", handleError, {
             once: true
         });
-        element.setAttribute((0, $51e72698ed0f3e92$export$2e2bcd8739ae039).stateAttr, (0, $51e72698ed0f3e92$export$2e2bcd8739ae039).states.loading);
+        element.setAttribute((0, $2e06dbd9a7176757$export$2e2bcd8739ae039).stateAttr, (0, $2e06dbd9a7176757$export$2e2bcd8739ae039).states.loading);
         options.onLoading(element);
     },
     loaded: (element, options)=>{
-        element.setAttribute((0, $51e72698ed0f3e92$export$2e2bcd8739ae039).stateAttr, (0, $51e72698ed0f3e92$export$2e2bcd8739ae039).states.loaded);
+        element.setAttribute((0, $2e06dbd9a7176757$export$2e2bcd8739ae039).stateAttr, (0, $2e06dbd9a7176757$export$2e2bcd8739ae039).states.loaded);
         element.removeAttribute(options.attrs.src);
         element.removeAttribute(options.attrs.srcset);
         element.removeAttribute(options.attrs.poster);
         options.onLoaded(element);
     },
     error: (element, options, error)=>{
-        element.setAttribute((0, $51e72698ed0f3e92$export$2e2bcd8739ae039).stateAttr, (0, $51e72698ed0f3e92$export$2e2bcd8739ae039).states.error);
+        element.setAttribute((0, $2e06dbd9a7176757$export$2e2bcd8739ae039).stateAttr, (0, $2e06dbd9a7176757$export$2e2bcd8739ae039).states.error);
         options.onError(element, error);
     }
 };
-var $94035bc41cd26735$export$2e2bcd8739ae039 = $94035bc41cd26735$var$states;
-
-
-/**
- * Set attributes on the given HTML element based on the provided options.
- *
- * @module assetLoader
- *
- * @param {HTMLElement} element - The HTML element to set attributes on.
- * @param {Object} options - Options for attribute names.
- * @param {Object} options.attrs - Attribute names.
- * @param {string} [options.attrs.src] - Attribute name for 'src'.
- * @param {string} [options.attrs.srcset] - Attribute name for 'srcset'.
- * @param {string} [options.attrs.poster] - Attribute name for 'poster'.
- */ var $fa423858cf60d4ae$export$2e2bcd8739ae039 = (element, options)=>{
-    const assets = {
-        src: element.getAttribute(options.attrs.src),
-        srcset: element.getAttribute(options.attrs.srcset),
-        poster: element.getAttribute(options.attrs.poster)
-    };
-    if (assets.src) element.setAttribute("src", assets.src);
-    if (assets.srcset) element.setAttribute("srcset", assets.srcset);
-    if (assets.poster) element.setAttribute("poster", assets.poster);
-};
+var $be4bb12be4dd9f4e$export$2e2bcd8739ae039 = $be4bb12be4dd9f4e$var$states;
 
 
 
@@ -146,9 +146,9 @@ var /**
  * @param {HTMLElement} element - The HTML element to be checked.
  * @throws {Error} Throws an error if the element type is not supported.
  * @returns {boolean} Returns true if the element type is supported.
- */ $4a8d64b6206062f5$export$2e2bcd8739ae039 = (element)=>{
+ */ $67c2ab11c12b7b4c$export$2e2bcd8739ae039 = (element)=>{
     const elementType = element.tagName.toLowerCase();
-    const isSupported = (0, $51e72698ed0f3e92$export$2e2bcd8739ae039).supportedElements.includes(elementType);
+    const isSupported = (0, $2e06dbd9a7176757$export$2e2bcd8739ae039).supportedElements.includes(elementType);
     if (isSupported) return true;
     throw new Error(`Element type ${elementType} is not supported!`);
 };
@@ -162,7 +162,7 @@ var /**
  * @param {Element} item - The DOM element to be observed.
  * @param {Function} callback - The function to be called when the item is intersecting.
  * @param {Object} settings - The options for the Intersection Observer.
- */ var $5aa3f28da5200ea6$export$2e2bcd8739ae039 = (item, callback, settings)=>{
+ */ var $afbda835b72f3fa2$export$2e2bcd8739ae039 = (item, callback, settings)=>{
     const handleIntersection = (entries, observer)=>{
         entries.forEach((entry)=>{
             if (!entry.isIntersecting) return;
@@ -182,7 +182,7 @@ var /**
  *
  * @param {string | Element | NodeList | Array} selector - The selector to match elements.
  * @returns {NodeList} - The NodeList containing the selected elements.
- */ var $e5a64a9b43e3c02c$export$2e2bcd8739ae039 = (selector)=>{
+ */ var $286db38838bca09d$export$2e2bcd8739ae039 = (selector)=>{
     if (selector instanceof Element) return [
         selector
     ];
@@ -194,24 +194,24 @@ var /**
 
 var $3e2aed16982f049f$export$2e2bcd8739ae039 = (selector, customOptions = {})=>{
     const options = {
-        ...(0, $caecf5182af9e868$export$2e2bcd8739ae039),
+        ...(0, $e4e7a73bee6a4aee$export$2e2bcd8739ae039),
         ...customOptions
     };
     const observerCallback = (target)=>{
-        (0, $94035bc41cd26735$export$2e2bcd8739ae039).loading(target, options);
-        (0, $fa423858cf60d4ae$export$2e2bcd8739ae039)(target, options);
+        (0, $be4bb12be4dd9f4e$export$2e2bcd8739ae039).loading(target, options);
+        (0, $55aebfb21ba6071b$export$2e2bcd8739ae039)(target, options);
     };
     const processLazyItem = (item)=>{
         try {
-            (0, $94035bc41cd26735$export$2e2bcd8739ae039).waiting(item, options);
-            (0, $4a8d64b6206062f5$export$2e2bcd8739ae039)(item);
-            (0, $5aa3f28da5200ea6$export$2e2bcd8739ae039)(item, observerCallback, options.observer);
+            (0, $be4bb12be4dd9f4e$export$2e2bcd8739ae039).waiting(item, options);
+            (0, $67c2ab11c12b7b4c$export$2e2bcd8739ae039)(item);
+            (0, $afbda835b72f3fa2$export$2e2bcd8739ae039)(item, observerCallback, options.observer);
         } catch (error) {
-            (0, $94035bc41cd26735$export$2e2bcd8739ae039).error(item, options, error.message);
+            (0, $be4bb12be4dd9f4e$export$2e2bcd8739ae039).error(item, options, error.message);
         }
     };
     try {
-        const lazyItems = (0, $e5a64a9b43e3c02c$export$2e2bcd8739ae039)(selector);
+        const lazyItems = (0, $286db38838bca09d$export$2e2bcd8739ae039)(selector);
         if (!lazyItems.length) throw new Error("No lazy loadable element found!");
         lazyItems.forEach(processLazyItem);
     } catch (error) {
