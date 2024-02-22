@@ -5,12 +5,13 @@
   "description": "Another, another and another Lazy Load Library",
   "source": "src/app.js",
   "module": "dist/lazy-load.js",
-	"files": [
+  "files": [
     "dist"
   ],
   "scripts": {
     "watch": "parcel watch",
-    "build": "parcel build --no-source-maps --no-cache"
+    "build": "parcel build --no-source-maps --no-cache",
+    "jasmine": "jasmine-browser-runner serve"
   },
   "keywords": [
     "lazy",
@@ -39,6 +40,9 @@
   "license": "MIT",
   "devDependencies": {
     "@parcel/resolver-glob": "^2.9.3",
+    "jasmine": "^5.1.0",
+    "jasmine-browser-runner": "^2.3.0",
+    "jasmine-core": "^5.1.2",
     "parcel": "^2.9.3"
   }
 }
