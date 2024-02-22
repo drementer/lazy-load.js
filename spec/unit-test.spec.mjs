@@ -10,8 +10,6 @@ const states = {
 };
 
 describe('Lazy Load Test', () => {
-  let image;
-
   beforeEach(function () {
     this.image = createImage('https://unsplash.it/400/400?gravity=center');
     lazyLoad(this.image);
