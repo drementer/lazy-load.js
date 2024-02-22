@@ -1,5 +1,5 @@
 export default (src) => {
-  const image = document.createElement('img');
+  const image = new Image();
   image.setAttribute('lazy', `${src}?random=${Math.random()}`);
 
   return document.body.appendChild(image);
