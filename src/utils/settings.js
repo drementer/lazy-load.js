@@ -13,11 +13,11 @@
  */
 export default {
   stateAttr: 'lazy-state',
+  supportedElements: ['img', 'picture', 'video', 'embed', 'object'],
   states: {
     waiting: 'waiting',
     loading: 'loading',
     loaded: 'loaded',
     error: 'error',
   },
-  supportedElements: ['img', 'picture', 'video', 'embed', 'object'],
 };
