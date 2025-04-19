@@ -9,12 +9,13 @@
  */
 export default (item, callback, settings) => {
   const handleIntersection = (entries, observer) => {
-    entries.forEach((entry) => {
+    const handleEntry = (entry) => {
       if (!entry.isIntersecting) return;
 
       callback(entry.target);
       observer.unobserve(entry.target);
-    });
+    };
+    entries.forEach(handleEntry);
   };
 
   const observer = new IntersectionObserver(handleIntersection, settings);
