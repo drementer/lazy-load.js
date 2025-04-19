@@ -44,11 +44,6 @@ export default (selector, customOptions = {}) => {
     }
   };
 
-  try {
     const lazyItems = getElements(selector);
-
     lazyItems.forEach(processLazyItem);
-  } catch (error) {
-    console.error('Lazy error:', error.message);
-  }
 };
