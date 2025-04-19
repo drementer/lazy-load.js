@@ -15,7 +15,7 @@ import checkSupport from './helpers/checkSupport.js';
 import observer from './helpers/observer.js';
 import getElements from './helpers/getElements.js';
 
-export default (selector, customOptions = {}) => {
+export default (selector = '[lazy]', customOptions = {}) => {
   const options = { ...defaultOptions, ...customOptions };
 
   const handleLoading = (target) => {
