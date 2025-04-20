@@ -29,12 +29,16 @@ export default {
     options.onLoaded(element);
   },
 
-  /*
-		TODO: [] Update error logging to handle top level of app.
-	*/
   setError: (element, options, error) => {
-    console.warn('Error on:', element, error);
+    const errorDetails = {
+      element,
+      message: error,
+      timestamp: new Date().toISOString(),
+      elementType: element.tagName.toLowerCase(),
+    };
+
+    console.warn('Lazy-load error:', errorDetails);
     element.setAttribute(settings.stateAttr, settings.states.error);
-    options.onError(element, error);
+    options.onError(element, errorDetails);
   },
 };
