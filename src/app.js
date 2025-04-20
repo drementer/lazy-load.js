@@ -1,13 +1,3 @@
-/**
- * Lazy-load.js
- *
- * @author drementer
- * @module lazyLoad
- * @version 1.0.7
- * @license MIT
- * @see {@link https://github.com/drementer/lazy-load.js}
- */
-
 import defaultOptions from './utils/defaultOptions.js';
 import loadAsset from './helpers/assetLoader.js';
 import states from './helpers/states.js';
@@ -44,6 +34,6 @@ export default (selector = '[lazy]', customOptions = {}) => {
     }
   };
 
-    const lazyItems = getElements(selector);
-    lazyItems.forEach(processLazyItem);
+  const lazyItems = getElements(selector);
+  lazyItems.forEach(processLazyItem);
 };

@@ -1,6 +1,7 @@
 {
   "name": "lazy-load.js",
-  "version": "2.0.0",
+  "version": "0.0.8",
+  "type": "module",
   "homepage": "https://github.com/drementer/lazy-load.js",
   "description": "Another, another and another Lazy Load Library",
   "source": "src/app.js",
@@ -9,8 +10,8 @@
     "dist"
   ],
   "scripts": {
-    "watch": "parcel watch",
-    "build": "parcel build --no-source-maps --no-cache",
+    "watch": "rollup -c -w",
+    "build": "rollup -c",
     "jasmine": "jasmine-browser-runner serve"
   },
   "keywords": [
@@ -39,10 +40,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@parcel/resolver-glob": "^2.9.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "jasmine": "^5.1.0",
     "jasmine-browser-runner": "^2.3.0",
     "jasmine-core": "^5.1.2",
-    "parcel": "^2.9.3"
+    "rollup": "^4.39.0"
   }
 }
