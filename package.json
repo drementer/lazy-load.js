@@ -4,15 +4,14 @@
   "type": "module",
   "homepage": "https://github.com/drementer/lazy-load.js",
   "description": "Another, another and another Lazy Load Library",
-  "source": "src/app.js",
   "module": "dist/lazy-load.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "watch": "rollup -c -w",
+    "dev": "rollup -c -w",
     "build": "rollup -c",
-    "jasmine": "jasmine-browser-runner serve"
+    "test": "jasmine"
   },
   "keywords": [
     "lazy",
@@ -41,9 +40,7 @@
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
-    "jasmine": "^5.1.0",
-    "jasmine-browser-runner": "^2.3.0",
-    "jasmine-core": "^5.1.2",
+    "jasmine": "^5.7.1",
     "rollup": "^4.39.0"
   }
 }

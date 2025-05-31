@@ -1,16 +1,14 @@
 import terser from '@rollup/plugin-terser';
 
 export default {
-  input: 'src/app.js',
+  input: 'src/index.js',
   output: {
     file: 'dist/lazy-load.js',
     format: 'umd',
     name: 'lazyLoad',
     exports: 'auto',
     banner: `/**
- * Lazy-load.js
- *
- * @author drementer
+ * lazy-load.js
  * @version 0.0.8
  * @license MIT
  * @link https://github.com/drementer/lazy-load.js
