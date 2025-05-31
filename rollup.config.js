@@ -9,7 +9,7 @@ export default {
     exports: 'auto',
     banner: `/**
  * lazy-load.js
- * @version 0.0.8
+ * @version 1.1.0
  * @license MIT
  * @link https://github.com/drementer/lazy-load.js
  */`,
