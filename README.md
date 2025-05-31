@@ -8,8 +8,7 @@ A lightweight lazy loading library for modern browsers.
 - Configurable options
 - Uses IntersectionObserver API
 - Support for various media types (img, video, iframe, etc.)
-- Performance tracking
-- Error handling and fallback images
+- Event system for better control
 
 ## Installation
 
@@ -51,11 +50,7 @@ const customLoader = lazyLoad('[lazy]', {
   observer: {
     rootMargin: '200px 0px',
     threshold: 0.1
-  },
-  // Traditional callback options still work
-  onLoaded: (element) => {
-    console.log('Loaded via options:', element);
-  },
+  }
 });
 
 // You can also add event listeners this way
@@ -72,9 +67,6 @@ customLoader.once('loaded', (element) => {
 const myHandler = (element) => console.log('Element loaded:', element);
 customLoader.on('loaded', myHandler);
 customLoader.off('loaded', myHandler);
-
-// Remove all listeners for an event
-customLoader.removeAllListeners('loaded');
 ```
 
 ## Custom Attributes
@@ -123,16 +115,25 @@ You can apply CSS styles based on this attribute:
     root: null,
     threshold: 1,
     rootMargin: '100% 0px',
-  },
-  onWaiting: (element) => {},
-  onLoaded: (element) => {},
-  onLoading: (element) => {},
-  onError: (element, error) => {},
-  errorFallback: 'fallback-image.jpg',
-  enablePerformanceMetrics: false,
-  onPerformanceMeasure: (metrics) => {}
+  }
 }
 ```
+
+## Events
+
+The library provides an event system for better control over the loading process:
+
+- `waiting`: Fired when element is not yet visible
+- `loading`: Fired when element starts loading
+- `loaded`: Fired when element is loaded successfully
+- `error`: Fired when loading fails
+
+## Browser Support
+
+- Chrome 51+
+- Firefox 55+
+- Safari 12.1+
+- Edge 79+
 
 ## License
 
