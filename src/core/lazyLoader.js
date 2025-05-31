@@ -17,11 +17,6 @@ export default class extends EventEmitter {
     this.#init();
   }
 
-  #clearAttributes(target) {
-    const assetAttr = Object.entries(this.#options.attrs);
-    assetAttr.forEach(([attr, lazyAttr]) => target.removeAttribute(lazyAttr));
-  }
-
   #processItem(item) {
     try {
       checkSupport(item);
@@ -39,7 +34,6 @@ export default class extends EventEmitter {
     target.addEventListener(
       'load',
       () => {
-        this.#clearAttributes(target);
         this.emit('loaded', target);
       },
       { once: true }
