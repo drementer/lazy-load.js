@@ -2,13 +2,6 @@ export default (element, options) => {
   const { attrs } = options;
   const elementType = element.tagName.toLowerCase();
 
-  const loaders = {
-    img: loadImage,
-    video: loadVideo,
-    iframe: loadIframe,
-    default: loadDefault,
-  };
-
   const loadAttribute = (element, attr, lazyAttr) => {
     const value = element.getAttribute(lazyAttr);
 
@@ -35,6 +28,13 @@ export default (element, options) => {
     Object.entries(attrs).forEach(([attr, lazyAttr]) => {
       loadAttribute(element, attr, lazyAttr);
     });
+  };
+
+  const loaders = {
+    img: loadImage,
+    video: loadVideo,
+    iframe: loadIframe,
+    default: loadDefault,
   };
 
   const loadMedia = () => {
