@@ -1,7 +1,7 @@
 import EventEmitter from '../src/core/eventEmitter.js';
 const { log } = console;
 
-describe('Event Emitter Test', () => {
+describe('Event Emitter', () => {
   let emitter;
 
   beforeEach(() => (emitter = new EventEmitter()));
