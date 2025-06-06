@@ -8,8 +8,8 @@ const supportedElements = [
 ];
 
 export default (element) => {
-  const elementType = element.tagName.toLowerCase();
-  const isSupported = supportedElements.includes(elementType);
+  const elementType = element.tagName;
+  const isSupported = supportedElements.includes(elementType.toLowerCase());
 
   if (!isSupported) throw new Error(`${elementType} Element is not supported!`);
   return true;
