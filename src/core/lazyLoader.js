@@ -21,7 +21,7 @@ export default class extends EventEmitter {
     try {
       checkSupport(item);
       this.emit('waiting', item);
-      observer(item, this.#handleLoading, this.#options.observer);
+      observer(item, this.#handleLoading.bind(this), this.#options.observer);
     } catch (error) {
       console.warn('Lazy-load error:', item);
     }
