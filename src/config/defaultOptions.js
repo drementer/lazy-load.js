@@ -3,6 +3,7 @@ export default {
     src: 'lazy',
     srcset: 'lazy-srcset',
     poster: 'lazy-poster',
+    state: 'lazy-state',
   },
   observer: {
     root: null,

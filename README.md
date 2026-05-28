@@ -130,10 +130,12 @@ The library provides an event system for better control over the loading process
 
 ## Browser Support
 
-- Chrome 51+
-- Firefox 55+
-- Safari 12.1+
-- Edge 79+
+Requires `IntersectionObserver` and native private class fields (`#`):
+
+- Chrome 84+
+- Firefox 90+
+- Safari 14.1+
+- Edge 84+
 
 ## License
 

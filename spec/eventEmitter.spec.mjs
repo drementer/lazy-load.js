@@ -39,4 +39,28 @@ describe('Event Emitter', () => {
 
     expect(count).toBe(1);
   });
+
+  it('Should not register listener with invalid event name', () => {
+    emitter.on(123, () => true);
+    expect(emitter.events[123]).toBeUndefined();
+  });
+
+  it('Should not register listener with invalid callback', () => {
+    emitter.on('Test Event', 'not-a-function');
+    expect(emitter.events['Test Event']).toBeUndefined();
+  });
+
+  it('Should return false when emitting with invalid event name', () => {
+    emitter.on('Test Event', () => true);
+    expect(emitter.emit(123)).toBe(false);
+  });
+
+  it('Should return a copy of listeners from events getter', () => {
+    const callback = () => true;
+    emitter.on('Test Event', callback);
+
+    emitter.events['Test Event'].push(() => false);
+
+    expect(emitter.events['Test Event'].length).toBe(1);
+  });
 });

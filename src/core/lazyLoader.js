@@ -17,35 +17,72 @@ export default class extends EventEmitter {
     this.#init();
   }
 
+  #setState(target, state) {
+    target.setAttribute(this.#options.attrs.state, state);
+  }
+
+  #isAlreadyLoaded(target) {
+    const tag = target.tagName?.toLowerCase();
+
+    if (tag === 'img') {
+      return target.complete && target.naturalWidth > 0;
+    }
+
+    if (tag === 'video') {
+      return target.readyState >= 2;
+    }
+
+    return false;
+  }
+
   #processItem(item) {
     try {
       checkSupport(item);
+      this.#setState(item, 'waiting');
       this.emit('waiting', item);
       observer(item, this.#handleLoading.bind(this), this.#options.observer);
     } catch (error) {
-      console.warn('Lazy-load error:', item);
+      this.#setState(item, 'error');
+      this.emit('error', item, error.message);
+      console.warn('Lazy-load error:', item, error);
     }
   }
 
   #handleLoading(target) {
+    this.#setState(target, 'loading');
     this.emit('loading', target);
-    assetLoader(target, this.#options);
 
-    target.addEventListener(
-      'load',
-      () => {
-        this.emit('loaded', target);
-      },
-      { once: true }
-    );
-    target.addEventListener(
-      'error',
-      () => {
-        this.emit('error', target, 'Loading media failed');
-        console.warn('Lazy-load error:', target);
-      },
-      { once: true }
-    );
+    let settled = false;
+
+    const onLoad = () => {
+      if (settled) return;
+      settled = true;
+      this.#setState(target, 'loaded');
+      this.emit('loaded', target);
+    };
+
+    const onError = () => {
+      if (settled) return;
+      settled = true;
+      this.#setState(target, 'error');
+      this.emit('error', target, 'Loading media failed');
+      console.warn('Lazy-load error:', target);
+    };
+
+    target.addEventListener('load', onLoad, { once: true });
+    target.addEventListener('error', onError, { once: true });
+
+    try {
+      assetLoader(target, this.#options);
+
+      if (this.#isAlreadyLoaded(target)) {
+        onLoad();
+      }
+    } catch (error) {
+      this.#setState(target, 'error');
+      this.emit('error', target, error.message);
+      console.warn('Lazy-load error:', target, error);
+    }
   }
 
   #init() {
