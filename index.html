@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lazy-load.js - Simple and Lightweight Lazy Loading Library</title>
+    <meta
+      name="description"
+      content="Lazy-load.js is a lightweight JavaScript library that allows lazy loading of images, videos and other media elements to improve your site's performance."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #3b82f6;
+        --primary-dark: #2563eb;
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --gray: #64748b;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        color: var(--dark);
+        background-color: var(--light);
+        padding: 0;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        padding: 4rem 1rem;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto 1.5rem;
+      }
+
+      .github-link {
+        display: inline-block;
+        background-color: white;
+        color: var(--primary);
+        text-decoration: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-top: 1rem;
+      }
+
+      .github-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      section {
+        padding: 4rem 1rem;
+      }
+
+      .section-heading {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .feature {
+        flex: 1;
+        min-width: 300px;
+        max-width: 400px;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--primary);
+      }
+
+      .demo {
+        background-color: #f1f5f9;
+        text-align: center;
+      }
+
+      .code-block {
+        background-color: var(--dark);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin: 0 auto 2rem;
+        max-width: 600px;
+        text-align: left;
+        overflow-x: auto;
+      }
+
+      .code-block code {
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+      }
+
+      img {
+        position: relative;
+        display: block;
+        margin: 1rem auto;
+        height: auto;
+        width: min(400px, 100%);
+        aspect-ratio: 1 / 1;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+
+      img:hover {
+        transform: scale(1.03);
+      }
+
+      [lazy-state='waiting'] {
+        background-color: #e2e8f0;
+      }
+
+      [lazy-state='loading'] {
+        filter: blur(5px);
+        transition: filter 0.3s;
+      }
+
+      [lazy-state='loaded'] {
+        filter: blur(0);
+      }
+
+      [lazy-state='error'] {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .feature {
+          min-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Lazy-load.js</h1>
+        <p>Lightweight, fast and customizable lazy loading library</p>
+        <a
+          href="https://github.com/drementer/lazy-load.js"
+          class="github-link"
+          target="_blank"
+          >View on GitHub</a
+        >
+      </div>
+    </header>
+
+    <section>
+      <div class="container">
+        <div class="section-heading">
+          <h2>Features</h2>
+          <p>What can you do with Lazy-load.js?</p>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <h3>Fast & Lightweight</h3>
+            <p>
+              Delivers maximum performance with minimal code size. Significantly reduces page loading times.
+            </p>
+          </div>
+
+          <div class="feature">
+            <h3>Easy to Use</h3>
+            <p>
+              Extremely easy to implement and configure. You can lazy load all elements on your page with just one line of code.
+            </p>
+          </div>
+
+          <div class="feature">
+            <h3>Multiple Media Support</h3>
+            <p>
+              Provides support for images, videos, iframes and more. Optimize all your media elements with the same library.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo">
+      <div class="container">
+        <div class="section-heading">
+          <h2>How to Use</h2>
+          <p>Start with just a few lines of code</p>
+        </div>
+
+        <div class="code-block">
+          <code>
+            &lt;!-- HTML --&gt;<br />
+            &lt;img lazy="image.jpg" alt="Description"&gt;<br /><br />
+
+            &lt;!-- JS --&gt;<br />
+            &lt;script src="lazy-load.js"&gt;&lt;/script&gt;<br />
+            &lt;script&gt;<br />
+            &nbsp;&nbsp;lazyLoad();<br />
+            &lt;/script&gt;
+          </code>
+        </div>
+
+        <h3>Live Demo</h3>
+        <p>Scroll down to trigger lazy loading</p>
+
+        <img
+          lazy="https://unsplash.it/1200/1200?random=2&gravity=center"
+          alt="Demo Image 1"
+        />
+        <img
+          lazy="dd"
+          alt="Demo Image 1"
+        />
+        <img
+          lazy="https://unsplash.it/1200/1200?random=3&gravity=center"
+          alt="Demo Image 2"
+        />
+        <img
+          lazy="https://unsplash.it/1200/1200?random=4&gravity=center"
+          alt="Demo Image 3"
+        />
+        <img
+          lazy="https://unsplash.it/1200/1200?random=5&gravity=center"
+          alt="Demo Image 4"
+        />
+        <img
+          lazy="https://unsplash.it/1200/1200?random=6&gravity=center"
+          alt="Demo Image 5"
+        />
+        <img
+          lazy="https://unsplash.it/1200/1200?random=7&gravity=center"
+          alt="Demo Image 6"
+        />
+        <img
+          lazy="https://unsplash.it/1200/1200?random=8&gravity=center"
+          alt="Demo Image 7"
+        />
+      </div>
+    </section>
+
+    <script src="./dist/lazy-load.js"></script>
+    <script>
+      lazyLoad();
+    </script>
+  </body>
+</html>

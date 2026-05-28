@@ -3,4 +3,5 @@
 [Dd]esktop.ini
 
 # Project
+node_modules/
 package-lock.json
